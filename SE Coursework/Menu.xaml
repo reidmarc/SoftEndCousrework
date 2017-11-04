@@ -1,0 +1,31 @@
+﻿<Page x:Class="SE_Coursework.Menu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SE_Coursework"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="Menu">
+
+    <Grid>
+        <!--The logo displayed-->
+        <Image x:Name="logoPicture" Source="Images/Logo.bmp" HorizontalAlignment="Center" Height="117" Margin="331,10,331,0" VerticalAlignment="Top" Width="538"/>
+
+
+        <!--Navigation - button (Setup - Arial Font, Size 12, Cannot be tab selected)-->
+        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1020,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False"/>
+
+        <!-- Menu Label-->
+        <Label Content="Menu" HorizontalAlignment="Left" Margin="233,251,0,0" VerticalAlignment="Top" Width="180" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
+
+        <!-- Underline for Menu Label -->
+        <Separator HorizontalAlignment="Left" Height="30" Margin="233,265,0,0" VerticalAlignment="Top" Width="65"/>
+
+
+        <Button x:Name="manuallyInputButton" Content="  Input Messages [manually]" HorizontalAlignment="Left" Margin="233,292,0,0" VerticalAlignment="Top" Width="180"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="manuallyInputButton_Click" HorizontalContentAlignment="Left"/>
+        <Button x:Name="InputButton" Content="  Input Messages [from file]" HorizontalAlignment="Left" Margin="233,327,0,0" VerticalAlignment="Top" Width="180"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="manuallyInputButton_Click" HorizontalContentAlignment="Left"/>
+
+
+    </Grid>
+</Page>
