@@ -21,7 +21,7 @@ namespace SE_Coursework.Pages
     /// </summary>
     public partial class InputManuallyPage : Page
     {
-        ValidationClass inputManValidation = new ValidationClass();
+        ValidationClass validation = new ValidationClass();
 
 
         public InputManuallyPage()
@@ -30,7 +30,26 @@ namespace SE_Coursework.Pages
         }
 
 
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {         
 
+            if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text).Equals(false))
+            {
+                MessageBox.Show("You have entered the header incorrectly.");
+                messageHeaderTxt.Focus();
+                return;
+            }
+
+            if (validation.MessageBodyInputValidation(messageBodyTxt.Text).Equals(false))
+            {
+                MessageBox.Show("You have entered the body incorrectly.");
+                messageBodyTxt.Focus();
+                return;
+            }
+
+
+
+        }
 
 
 
@@ -45,20 +64,16 @@ namespace SE_Coursework.Pages
             NavigationService.Navigate(menuPage);
         }
 
-
-
         // Method which handles the 'Exit Application' button being clicked
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
+            
+
             // Calls the method ExitApplicationValidation() from the Validation class.
-            inputManValidation.ExitApplicationValidation();
+            validation.ExitApplicationValidation();
         }
 
         #endregion
-
-
-
-
-
+        
     }
 }

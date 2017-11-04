@@ -19,5 +19,19 @@
         <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1020,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False"/>
         <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1020,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="backButton_Click"/>
 
+
+        <!-- Message Header-->
+        <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="140,175,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
+        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="331,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+
+        <!-- Message Body-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="140,230,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
+        
+        <!-- Save Button-->
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="542,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click"/>
+
     </Grid>
 </Page>
