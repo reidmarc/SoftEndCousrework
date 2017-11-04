@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE_Coursework.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,17 +14,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SE_Coursework
+namespace SE_Coursework.Pages
 {
     /// <summary>
-    /// Interaction logic for Menu.xaml
+    /// Interaction logic for MenuPage.xaml
     /// </summary>
-    public partial class Menu : Page
+    public partial class MenuPage : Page
     {
-        Validation validation = new Validation();
+        ValidationClass menuValidation = new ValidationClass();
 
 
-        public Menu()
+
+
+
+        public MenuPage()
         {
             InitializeComponent();
         }
@@ -37,7 +41,16 @@ namespace SE_Coursework
 
         private void manuallyInputButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button works!!! OMG");
+            // Instantiate an object of the InputManually page
+            InputManuallyPage inputManPage = new InputManuallyPage();
+
+            // Navigates to the InputManually page
+            NavigationService.Navigate(inputManPage);
+        }
+
+        private void autoInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            // later
         }
 
         #endregion
@@ -53,11 +66,12 @@ namespace SE_Coursework
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             // Calls the method ExitApplicationValidation() from the Validation class.
-            validation.ExitApplicationValidation();
+            menuValidation.ExitApplicationValidation();
         }
+
 
         #endregion
 
-       
+
     }
 }

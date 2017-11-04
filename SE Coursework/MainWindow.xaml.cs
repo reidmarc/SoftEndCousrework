@@ -24,7 +24,7 @@ namespace SE_Coursework
         {
             InitializeComponent();
 
-            MainFrame.Content = new SE_Coursework.Menu();
+            MainFrame.Content = new SE_Coursework.Pages.MenuPage();
         }
     }
 }

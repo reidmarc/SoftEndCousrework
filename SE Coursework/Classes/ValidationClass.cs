@@ -5,12 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SE_Coursework
+namespace SE_Coursework.Classes
 {
-    public class Validation
+    public class ValidationClass
     {
-
-
 
 
 
@@ -40,8 +38,5 @@ namespace SE_Coursework
         }
 
         #endregion
-
-
-
     }
 }
