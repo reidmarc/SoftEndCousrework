@@ -33,14 +33,14 @@ namespace SE_Coursework.Pages
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {         
 
-            if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text).Equals(false))
+            if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text.Trim()).Equals(false))
             {
                 MessageBox.Show("You have entered the header incorrectly.");
                 messageHeaderTxt.Focus();
                 return;
             }
 
-            if (validation.MessageBodyInputValidation(messageBodyTxt.Text).Equals(false))
+            if (validation.MessageBodyInputValidation(messageBodyTxt.Text.Trim()).Equals(false))
             {
                 MessageBox.Show("You have entered the body incorrectly.");
                 messageBodyTxt.Focus();

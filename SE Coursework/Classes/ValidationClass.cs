@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -74,22 +75,118 @@ namespace SE_Coursework.Classes
 
         public bool MessageBodyInputValidation(string inputText)
         {
+            string sender = string.Empty;            
+
+            // SMS
             if (smsMessage.Equals(true))
             {
+                string smsPattern = @"^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$";
+
+                Regex myRegex = new Regex(smsPattern, RegexOptions.None);
+
+                sender = myRegex.Replace(inputText, string.Empty);
+
+                MessageBox.Show(sender);
+
+                //foreach (Match myMatch in myRegex.Matches(inputText))
+                //{
+                //    if (myMatch.Success)
+                //    {
+                //        sender = myMatch.Value;
+                //        MessageBox.Show(sender);
+                //    }
+                //}
+
 
             }
 
+            // EMAIL
             if (emailMessage.Equals(true))
             {
+                string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
+                Regex myRegex = new Regex(emailPattern, RegexOptions.None);
 
+                Match myMatch = myRegex.Match(inputText);
+                
+                if (myMatch.Success)
+                {
+                    sender = myMatch.Value;
+                }
+                
+
+                //foreach (Match myMatch in myRegex.Matches(inputText))
+                //{
+                //    if (myMatch.Success)
+                //    {
+                //        sender = myMatch.Value;                        
+                //    }
+                //}
+
+                // Removes the email address from the string and replaces it with a '|'
+                string newInputText = myRegex.Replace(inputText, "|");
+
+                // Splits the string in 2 based on the delimiter '|'
+                string[] splitText = newInputText.Split('|');                               
+
+                // Checks the email doesn't exceed the maximum length
+                if (splitText[1].Length > 1048)
+                {
+                    MessageBox.Show("This email is longer than 1028 max characters");
+                    return false;
+                }
+
+                // Creates the string name from the part of splitText before the '|'
+                string emailName = splitText[0];
+
+                // Creates substrings from newInputText
+                string emailSubject = splitText[1].Substring(0, 21);
+                string emailMessageText = splitText[1].Substring(21);
+
+                // Testing output
+                MessageBox.Show($"Sender Name: {emailName.Trim()}\nSender Email: {sender.Trim()}\nSubject: {emailSubject.Trim()}\nMessage Text: {emailMessageText.Trim()}");
             }
 
+            // TWEET
             if (tweetMessage.Equals(true))
             {
+                string tweetPattern = @"^((@\w+)\s)+";
+
+                Regex myRegex = new Regex(tweetPattern, RegexOptions.None);
+
+                Match myMatch = myRegex.Match(inputText);
+
+                if (myMatch.Value.Length > 17)
+                {
+                    return false;
+                }
+
+                if (myMatch.Success)
+                {
+                    sender = myMatch.Value;
+                }
+                
+
+                // Removes the Twitter ID  from the string, leaving the tweet.
+                string tweetText = myRegex.Replace(inputText, string.Empty);
+
+
+                if (tweetText.Length > 140)
+                {
+                    return false;
+                }
+
+
+
+
+                MessageBox.Show($"Twitter ID: {sender.Trim()}\nTweet: {tweetText.Trim()}");
 
             }
 
             return false;
+
+
+            
+            
         }
 
 
