@@ -12,12 +12,12 @@ namespace SE_Coursework.Classes
     public class JsonClass
     {    
 
-        public void Serialize(List<MessageClass> list)
+        public void Serialize(List<MessageClass> list, string path)
         {
             try
             {
                 // serialize JSON to a string and then write string to a file
-                File.WriteAllText(@".\EustonLeisureMessages.json", JsonConvert.SerializeObject(list, Formatting.Indented));
+                File.WriteAllText(path, JsonConvert.SerializeObject(list, Formatting.Indented));
 
                 // Message informing the user that the file has been saved successfully
                 MessageBox.Show("JSON File saved.");
@@ -28,6 +28,9 @@ namespace SE_Coursework.Classes
                 MessageBox.Show(ex.ToString());
             }
         }
+
+
+       
 
         public List<MessageClass> Deserialize()
         {            

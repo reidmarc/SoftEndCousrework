@@ -24,6 +24,7 @@ namespace SE_Coursework.Pages
         #region Object
 
         ValidationClass menuValidation = new ValidationClass();
+        JsonClass jsonClass = new JsonClass();
 
         #endregion
 
@@ -64,7 +65,13 @@ namespace SE_Coursework.Pages
 
         private void exportJson_Click(object sender, RoutedEventArgs e)
         {
+            menuValidation.RetrieveStoredList();
 
+            string path = @"C:\Users\reidm\Desktop\EustonLeisureMessages.json";
+
+            jsonClass.Serialize(menuValidation.listOfMessages, path);
+
+            MessageBox.Show("JSON Exported");
         }
 
 

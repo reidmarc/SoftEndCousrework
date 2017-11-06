@@ -34,12 +34,12 @@ namespace SE_Coursework.Pages
 
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
-        {         
+        {
+            string path = @".\EustonLeisureMessages.json";
 
-            
 
             // Converts the whole list of messages into JSON and stores it
-            json.Serialize(validation.listOfMessages);
+            json.Serialize(validation.listOfMessages, path);
 
         }
 

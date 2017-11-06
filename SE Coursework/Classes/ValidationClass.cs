@@ -246,7 +246,7 @@ namespace SE_Coursework.Classes
 
 
         public void RetrieveStoredList()
-        {
+        { 
             try
             {
                 // Returns the list that is stored as JSON             
