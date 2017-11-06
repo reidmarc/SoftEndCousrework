@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,14 +16,26 @@ namespace SE_Coursework.Classes
         bool emailMessage = false;
         bool tweetMessage = false;
 
+        string header;
+
+        public List<MessageClass> listOfMessages = new List<MessageClass>();        
+
+        //public string Header { get; set; }
+        //public string Sender { get; set; }
+        //public string Subject { get; set; }
+        //public string TweetText { get; set; }
+
+
+
+
+        JsonClass jsonClass = new JsonClass();
+
 
         // Default Constructor
         public ValidationClass()
         {
 
-        }
-
-        
+        }    
 
 
 
@@ -32,13 +46,13 @@ namespace SE_Coursework.Classes
             string _inputText = inputText[0].ToString();
 
             // Trims the input then stores it as the string numeric
-            string numeric = inputText.Trim();
+            header = inputText.Trim();
 
             // Stores a substring of numeric as the string subStringNumeric
-            string subStringNumeric = numeric.Substring(1, 9);
+            string subStringNumeric = header.Substring(1, 9);
 
             // Checks the length of the input
-            if (!(numeric.Length).Equals(10))
+            if (!(header.Length).Equals(10))
             {
                 return false;
             }            
@@ -50,7 +64,7 @@ namespace SE_Coursework.Classes
             }
 
 
-
+            
 
             if (_inputText.ToUpper().Equals("S"))
             {
@@ -88,16 +102,24 @@ namespace SE_Coursework.Classes
 
                 MessageBox.Show(sender);
 
-                //foreach (Match myMatch in myRegex.Matches(inputText))
-                //{
-                //    if (myMatch.Success)
-                //    {
-                //        sender = myMatch.Value;
-                //        MessageBox.Show(sender);
-                //    }
-                //}
+              
 
 
+
+                MessageClass message = new MessageClass()
+                {
+                    Header = header,
+                    Sender = sender,
+                    MessageText = inputText
+                };
+
+
+                // Adds sms to the list
+                AddMessageToList(header, sender, inputText);
+
+                MessageBox.Show("SMS Saved");
+
+                return true;
             }
 
             // EMAIL
@@ -111,16 +133,7 @@ namespace SE_Coursework.Classes
                 if (myMatch.Success)
                 {
                     sender = myMatch.Value;
-                }
-                
-
-                //foreach (Match myMatch in myRegex.Matches(inputText))
-                //{
-                //    if (myMatch.Success)
-                //    {
-                //        sender = myMatch.Value;                        
-                //    }
-                //}
+                }  
 
                 // Removes the email address from the string and replaces it with a '|'
                 string newInputText = myRegex.Replace(inputText, "|");
@@ -141,9 +154,14 @@ namespace SE_Coursework.Classes
                 // Creates substrings from newInputText
                 string emailSubject = splitText[1].Substring(0, 21);
                 string emailMessageText = splitText[1].Substring(21);
+                                
 
-                // Testing output
-                MessageBox.Show($"Sender Name: {emailName.Trim()}\nSender Email: {sender.Trim()}\nSubject: {emailSubject.Trim()}\nMessage Text: {emailMessageText.Trim()}");
+                // Adds email to the list
+                AddMessageToList(header, sender, emailSubject, emailMessageText);
+
+                MessageBox.Show("Email Saved");
+
+                return true;
             }
 
             // TWEET
@@ -174,23 +192,65 @@ namespace SE_Coursework.Classes
                 {
                     return false;
                 }
+                
+                // Adds tweet to the list
+                AddMessageToList(header, sender, tweetText);
+
+                MessageBox.Show("Tweet Saved");
 
 
-
-
-                MessageBox.Show($"Twitter ID: {sender.Trim()}\nTweet: {tweetText.Trim()}");
+                return true;                
 
             }
 
-            return false;
-
-
-            
+            return false;           
             
         }
 
 
+        // Adds SMS and Tweets to the list
+        private void AddMessageToList(string header, string sender, string text)
+        {
+            MessageClass message = new MessageClass()
+            {
+                Header = header,
+                Sender = sender,                
+                MessageText = text
+            };
 
+            listOfMessages.Add(message);
+
+            MessageBox.Show("File added to the list.");
+
+
+        }
+
+
+        // Adds Email to the list
+        private void AddMessageToList(string header, string sender, string subject, string text)
+        {
+            MessageClass message = new MessageClass()
+            {
+                Header = header,
+                Sender = sender,
+                Subject = subject,
+                MessageText = text
+            };
+
+            listOfMessages.Add(message);
+
+            MessageBox.Show("File added to the list.");
+
+
+        }
+
+
+        public void RetrieveStoredList()
+        {
+            // Returns the list that is stored as JSON             
+            listOfMessages = jsonClass.Deserialize();
+
+        }    
 
         #region User's Choice Validation Methods
 

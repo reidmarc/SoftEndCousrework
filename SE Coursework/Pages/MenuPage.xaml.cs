@@ -29,13 +29,9 @@ namespace SE_Coursework.Pages
 
         public MenuPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
-
-
-
-
-
+        
 
         #region Click Events
 
@@ -53,13 +49,24 @@ namespace SE_Coursework.Pages
             // later
         }
 
+        private void viewMessagesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Instantiate an object of the ViewMessages Page           
+            ViewMessagesPage viewMessages = new ViewMessagesPage();
+
+            // Navigates to the InputManually page
+            NavigationService.Navigate(viewMessages);
+
+        }
+
+        private void exportJson_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
         #endregion
-
-
-
-
-
-
+        
         #region Exit Button
 
         // Method which handles the 'Exit Application' button being clicked
@@ -70,8 +77,9 @@ namespace SE_Coursework.Pages
         }
 
 
+
+
         #endregion
-
-
+                
     }
 }

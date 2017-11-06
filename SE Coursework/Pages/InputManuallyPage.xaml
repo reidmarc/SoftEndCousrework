@@ -21,28 +21,64 @@
 
 
         <!-- Message Header-->
-        <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="140,175,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="331,175,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="34,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
+        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="250" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
 
 
         <!-- Message Body-->
-        <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="140,230,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="34,282,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
 
         <!-- SMS Test-->
         <!-- <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,230,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="447595414941 Hello world, what day is it?" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
         -->
-        
-        
+
+
         <!-- Email Test-->
-        <!-- <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,230,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="Marc Reid marcreid@hotmail.com 01234567890123456789 This is the main body of the email...... jhdhdjs h hjsd  jhsjhsd jh jsd jhsj hsdjdhsjsdhsdjshd" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
+        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="Marc Reid marcreid@hotmail.com 01234567890123456789 This is the main body of the email...... jhdhdjs h hjsd  jhsjhsd jh jsd jhsj hsdjdhsjsdhsdjshd" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
+        
+
+
+        <!-- Tweet Test
+        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="@marcreid This is my tweet." VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
         -->
         
-        
-        <!-- Tweet Test-->
-        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,230,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="@marcreid This is my tweet." VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
-
         <!-- Save Button-->
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="542,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="632,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click"/>
+
+        <!--The vertical divider-->
+        <Separator HorizontalAlignment="Left" Height="28" Margin="280,445,0,0" VerticalAlignment="Top" Width="640" RenderTransformOrigin="0.5,0.5" Foreground="Black">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+
+
+        <!-- Output Side-->
+        <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="632,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
+        <TextBox x:Name="convertedMessageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="632,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+        <Label Content="Message Subject:" HorizontalAlignment="Left" Height="30" Margin="920,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
+        <TextBox x:Name="convertedMessageSubjectTxt" HorizontalAlignment="Left" Height="30" Margin="920,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+        <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="632,282,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="convertedMessageBodyTxt" HorizontalAlignment="Left" Margin="632,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
+
+
+        
+        <!-- Convert Button-->
+        <Button x:Name="convertButton" Content="Convert" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="convertButton_Click" />
+        
+        
+        
+        <!-- TEST -->
+        <Button Content="Button" HorizontalAlignment="Left" Margin="157,760,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+
 
     </Grid>
 </Page>

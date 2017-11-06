@@ -17,53 +17,30 @@ using System.Windows.Shapes;
 namespace SE_Coursework.Pages
 {
     /// <summary>
-    /// Interaction logic for InputManuallyPage.xaml
+    /// Interaction logic for ViewMessagesPage.xaml
     /// </summary>
-    public partial class InputManuallyPage : Page
+    public partial class ViewMessagesPage : Page        
     {
         ValidationClass validation = new ValidationClass();
         JsonClass json = new JsonClass();
-        
 
 
-        public InputManuallyPage()
+
+        public ViewMessagesPage()
         {
             InitializeComponent();
-            validation.RetrieveStoredList();
+            DisplayNewMessage();
         }
 
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {         
+        #region Click Events
 
-            if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text.Trim()).Equals(false))
-            {
-                MessageBox.Show("You have entered the header incorrectly.");
-                messageHeaderTxt.Focus();
-                return;
-            }
-
-            if (validation.MessageBodyInputValidation(messageBodyTxt.Text.Trim()).Equals(false))
-            {
-                MessageBox.Show("You have entered the body incorrectly.");
-                messageBodyTxt.Focus();
-                return;
-            }
-
-
-            
-        }
-
-        private void convertButton_Click(object sender, RoutedEventArgs e)
+        private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-
-            
-
-            // Converts the whole list of messages into JSON and stores it
-            json.Serialize(validation.listOfMessages);
-
+            DisplayNewMessage();
         }
 
+        #endregion
 
 
         #region Navigation Buttons
@@ -80,23 +57,26 @@ namespace SE_Coursework.Pages
         // Method which handles the 'Exit Application' button being clicked
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
 
             // Calls the method ExitApplicationValidation() from the Validation class.
             validation.ExitApplicationValidation();
         }
 
-
         #endregion
 
 
-        // TEST
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region Private Methods
+
+        private void DisplayNewMessage()
         {
-            MessageBox.Show(validation.listOfMessages.Count.ToString());
-
-
-
+            //MessageClass message = json.Deserialize();            
+            
+            //messageHeaderTxt.Text = message.Header;
+            //messageBodyTxt.Text = message.MessageText;    
         }
+
+        #endregion
+
     }
 }
