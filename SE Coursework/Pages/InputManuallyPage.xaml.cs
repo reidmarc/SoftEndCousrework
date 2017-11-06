@@ -36,6 +36,16 @@ namespace SE_Coursework.Pages
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {         
 
+            
+
+            // Converts the whole list of messages into JSON and stores it
+            json.Serialize(validation.listOfMessages);
+
+        }
+
+        private void convertButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Validates the message header
             if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text.Trim()).Equals(false))
             {
                 MessageBox.Show("You have entered the header incorrectly.");
@@ -43,25 +53,13 @@ namespace SE_Coursework.Pages
                 return;
             }
 
+            // Validates the message body
             if (validation.MessageBodyInputValidation(messageBodyTxt.Text.Trim()).Equals(false))
             {
                 MessageBox.Show("You have entered the body incorrectly.");
                 messageBodyTxt.Focus();
                 return;
             }
-
-
-            
-        }
-
-        private void convertButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            
-
-            // Converts the whole list of messages into JSON and stores it
-            json.Serialize(validation.listOfMessages);
-
         }
 
 
@@ -87,16 +85,6 @@ namespace SE_Coursework.Pages
         }
 
 
-        #endregion
-
-
-        // TEST
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(validation.listOfMessages.Count.ToString());
-
-
-
-        }
+        #endregion        
     }
 }

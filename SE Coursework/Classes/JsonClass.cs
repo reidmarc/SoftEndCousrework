@@ -30,12 +30,12 @@ namespace SE_Coursework.Classes
         }
 
         public List<MessageClass> Deserialize()
-        {
-
+        {            
             // read file into a string and deserialize JSON to a type
-            List<MessageClass> storedListOfMessages = JsonConvert.DeserializeObject<List<MessageClass>>(File.ReadAllText(@".\EustonLeisureMessages.json"));           
+            List<MessageClass> storedListOfMessages = JsonConvert.DeserializeObject<List<MessageClass>>(File.ReadAllText(@".\EustonLeisureMessages.json"));
 
-            return storedListOfMessages;
-        }     
+            return storedListOfMessages;          
+            
+        }
     }
 }

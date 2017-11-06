@@ -27,20 +27,11 @@
 
         <!-- Message Body-->
         <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="34,282,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-
-        <!-- SMS Test-->
-        <!-- <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,230,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="447595414941 Hello world, what day is it?" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
-        -->
-
-
-        <!-- Email Test-->
         <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="Marc Reid marcreid@hotmail.com 01234567890123456789 This is the main body of the email...... jhdhdjs h hjsd  jhsjhsd jh jsd jhsj hsdjdhsjsdhsdjshd" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
         
 
 
-        <!-- Tweet Test
-        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="@marcreid This is my tweet." VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
-        -->
+        
         
         <!-- Save Button-->
         <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="632,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click"/>
@@ -75,9 +66,7 @@
         
         
         
-        <!-- TEST -->
-        <Button Content="Button" HorizontalAlignment="Left" Margin="157,760,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-
+        
 
 
     </Grid>

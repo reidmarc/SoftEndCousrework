@@ -21,17 +21,20 @@ namespace SE_Coursework.Pages
     /// </summary>
     public partial class MenuPage : Page
     {
+        #region Object
+
         ValidationClass menuValidation = new ValidationClass();
 
+        #endregion
 
-
-
+        #region Constructor
 
         public MenuPage()
         {
             InitializeComponent(); 
         }
-        
+
+        #endregion
 
         #region Click Events
 

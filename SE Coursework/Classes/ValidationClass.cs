@@ -247,8 +247,15 @@ namespace SE_Coursework.Classes
 
         public void RetrieveStoredList()
         {
-            // Returns the list that is stored as JSON             
-            listOfMessages = jsonClass.Deserialize();
+            try
+            {
+                // Returns the list that is stored as JSON             
+                listOfMessages = jsonClass.Deserialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
         }    
 
