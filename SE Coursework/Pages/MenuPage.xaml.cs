@@ -50,7 +50,7 @@ namespace SE_Coursework.Pages
 
         private void autoInputButton_Click(object sender, RoutedEventArgs e)
         {
-            // later
+            MessageBox.Show("Feature not yet implmented.");
         }
 
         private void viewMessagesButton_Click(object sender, RoutedEventArgs e)
@@ -63,11 +63,13 @@ namespace SE_Coursework.Pages
 
         }
 
-        private void exportJson_Click(object sender, RoutedEventArgs e)
+        private void exportJsonButton_Click(object sender, RoutedEventArgs e)
         {
             menuValidation.RetrieveStoredList();
 
+            // Sets a string as the path for where to store the JSON file.
             string path = @"C:\Users\reidm\Desktop\EustonLeisureMessages.json";
+            
 
             jsonClass.Serialize(menuValidation.listOfMessages, path);
 
