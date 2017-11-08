@@ -25,12 +25,6 @@ namespace SE_Coursework.Pages
         JsonClass json = new JsonClass();
         ProcessingClass processing = new ProcessingClass();
 
-        
-
-
-
-
-
         public InputManuallyPage()
         {
             InitializeComponent();

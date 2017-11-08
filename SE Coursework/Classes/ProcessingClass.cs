@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SE_Coursework.Classes
 {
@@ -34,17 +35,17 @@ namespace SE_Coursework.Classes
 
         private void ProccessedSms(ref string proText)
         {
-
+            MessageBox.Show("Processing SMS");
         }
 
         private void ProccessedEmail(ref string proText)
         {
-
+            MessageBox.Show("Processing EMAIL");
         }
 
         private void ProccessedTweet(ref string proText)
         {
-
+            MessageBox.Show("Processing TWEET");
         }
 
 
