@@ -109,26 +109,25 @@ namespace SE_Coursework.Classes
 
             // SMS
             if (smsMessage.Equals(true))
-            {
-                // need checks to check size of input first
-
-
+            {   
                 while (smsCheck)
                 {
-                    for (int i = 15; i > 7; i--)
+                    if (inputText.Length > 15)
                     {
-                        sender = inputText.Trim().Substring(0, i);
-
-                        if (phoneNumberCheck.IsValid(sender))
+                        for (int i = 15; i > 7; i--)
                         {
+                            sender = inputText.Trim().Substring(0, i);
 
-                            text = inputText.Trim().Substring(i);
+                            if (phoneNumberCheck.IsValid(sender))
+                            {
+
+                                text = inputText.Trim().Substring(i);
 
 
-                            smsCheck = false;
-                            break;
+                                smsCheck = false;
+                                break;
+                            }
                         }
-
                     }
 
                     if (smsCheck.Equals(true))
