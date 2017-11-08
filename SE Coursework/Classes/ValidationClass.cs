@@ -260,14 +260,14 @@ namespace SE_Coursework.Classes
 
 
         // Adds message to the list
-        public void AddMessageToList()
+        public void AddMessageToList(string inputText)
         {
             MessageClass message = new MessageClass()
             {
                 Header = header,
                 Sender = sender,
                 Subject = subject,
-                MessageText = text
+                MessageText = inputText
             };
 
 

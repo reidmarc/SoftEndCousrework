@@ -25,6 +25,8 @@ namespace SE_Coursework.Pages
         JsonClass json = new JsonClass();
         ProcessingClass processing = new ProcessingClass();
 
+        private string processedText = string.Empty;
+
         public InputManuallyPage()
         {
             InitializeComponent();
@@ -32,32 +34,7 @@ namespace SE_Coursework.Pages
         }
 
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-            string path = @".\EustonLeisureMessages.json";
-
-            validation.AddMessageToList();
-
-
-            // Converts the whole list of messages into JSON and stores it
-            json.Serialize(validation.listOfMessages, path);
-
-            saveButton.IsEnabled = false;
-
-            validation.EndOfCycle();
-
-            convertedMessageHeaderTxt.Text = string.Empty;
-            convertedMessageSenderTxt.Text = string.Empty;
-            convertedMessageSubjectTxt.Text = string.Empty;
-            convertedMessageBodyTxt.Text = string.Empty;
-            messageHeaderTxt.Text = string.Empty;
-            messageBodyTxt.Text = string.Empty;
-
-
-        }
-
+        
         private void convertButton_Click(object sender, RoutedEventArgs e)
         {
             // Validates the message header
@@ -90,8 +67,36 @@ namespace SE_Coursework.Pages
             convertedMessageSenderTxt.Text = validation.Sender;
             convertedMessageSubjectTxt.Text = validation.Subject;
             convertedMessageBodyTxt.Text = text;
+            processedText = text;
 
             
+        }
+
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            string path = @".\EustonLeisureMessages.json";
+
+            validation.AddMessageToList(processedText);
+
+
+            // Converts the whole list of messages into JSON and stores it
+            json.Serialize(validation.listOfMessages, path);
+
+            saveButton.IsEnabled = false;
+
+            validation.EndOfCycle();
+
+            convertedMessageHeaderTxt.Text = string.Empty;
+            convertedMessageSenderTxt.Text = string.Empty;
+            convertedMessageSubjectTxt.Text = string.Empty;
+            convertedMessageBodyTxt.Text = string.Empty;
+            messageHeaderTxt.Text = string.Empty;
+            messageBodyTxt.Text = string.Empty;
+
+
         }
 
 
