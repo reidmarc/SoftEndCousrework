@@ -25,12 +25,14 @@ namespace SE_Coursework.Classes
         string name = string.Empty;
 
         public List<MessageClass> listOfMessages = new List<MessageClass>();
-        
 
-        //public string Header { get; set; }
-        //public string Sender { get; set; }
-        //public string Subject { get; set; }
-        //public string TweetText { get; set; }
+        MessageClass messageToReturn;
+
+        public string Header = string.Empty;
+        public string Sender = string.Empty;
+        public string Subject = string.Empty;
+        public string Text = string.Empty;
+
 
 
 
@@ -42,7 +44,7 @@ namespace SE_Coursework.Classes
         public ValidationClass()
         {
 
-        }    
+        }
 
 
 
@@ -62,7 +64,7 @@ namespace SE_Coursework.Classes
             if (!(header.Length).Equals(10))
             {
                 return false;
-            }            
+            }
 
             // Checks the substring is all numbers
             if (subStringNumeric.All(char.IsDigit).Equals(false))
@@ -71,7 +73,7 @@ namespace SE_Coursework.Classes
             }
 
 
-            
+
 
             if (_inputText.ToUpper().Equals("S"))
             {
@@ -90,16 +92,16 @@ namespace SE_Coursework.Classes
                 tweetMessage = true;
                 return true;
             }
-            
+
             return false;
         }
 
         public bool MessageBodyInputValidation(string inputText)
         {
             bool smsCheck = true;
-                        
+
             string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
-            
+
 
             EmailAddressAttribute emailAddressCheck = new EmailAddressAttribute();
             PhoneAttribute phoneNumberCheck = new PhoneAttribute();
@@ -116,7 +118,7 @@ namespace SE_Coursework.Classes
 
                 //MessageBox.Show(sender);
 
-                
+
 
                 while (smsCheck)
                 {
@@ -144,6 +146,7 @@ namespace SE_Coursework.Classes
 
                 }
 
+                SetPublicVariable();
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,16 +158,17 @@ namespace SE_Coursework.Classes
 
                 MessageBox.Show("SMS Converted");
 
+                
                 return true;
             }
 
             // EMAIL
             if (emailMessage.Equals(true))
-            {                
+            {
                 Regex myRegex = new Regex(emailPattern, RegexOptions.None);
 
                 Match myMatch = myRegex.Match(inputText);
-                
+
                 if (myMatch.Success)
                 {
                     sender = myMatch.Value;
@@ -186,7 +190,7 @@ namespace SE_Coursework.Classes
                 string newInputText = myRegex.Replace(inputText, "|");
 
                 // Splits the string in 2 based on the delimiter '|'
-                string[] splitText = newInputText.Split('|');                               
+                string[] splitText = newInputText.Split('|');
 
                 // Checks the email doesn't exceed the maximum length
                 if (splitText[1].Length > 1048)
@@ -202,6 +206,7 @@ namespace SE_Coursework.Classes
                 subject = splitText[1].Substring(0, 21);
                 text = splitText[1].Substring(21);
 
+                SetPublicVariable();
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,6 +218,7 @@ namespace SE_Coursework.Classes
 
                 MessageBox.Show("Email Coverted");
 
+                
                 return true;
             }
 
@@ -234,7 +240,7 @@ namespace SE_Coursework.Classes
                 {
                     sender = myMatch.Value;
                 }
-                
+
 
                 // Removes the Twitter ID  from the string, leaving the tweet.
                 text = myRegex.Replace(inputText, string.Empty);
@@ -244,6 +250,8 @@ namespace SE_Coursework.Classes
                 {
                     return false;
                 }
+
+                SetPublicVariable();
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -255,14 +263,40 @@ namespace SE_Coursework.Classes
 
                 MessageBox.Show("Tweet Converted");
 
-
-                return true;                
+                
+                return true;
 
             }
 
-            return false;           
-            
+            return false;
+
         }
+
+
+        private void SetPublicVariable()
+        {
+            Header = header;
+            Sender = sender;
+            Subject = subject;
+            Text = text;
+        }
+    
+        public void EndOfCycle()
+        {
+            header = string.Empty;
+            sender = string.Empty;
+            text = string.Empty;
+            subject = string.Empty;
+            name = string.Empty;       
+
+            Header = string.Empty;
+            Sender = string.Empty;
+            Subject = string.Empty;
+            Text = string.Empty;
+        }
+    
+    
+        
 
 
         // Adds message to the list
@@ -278,6 +312,7 @@ namespace SE_Coursework.Classes
 
 
             listOfMessages.Add(message);
+            messageToReturn = message;
 
             if (header[0].ToString().Equals("T"))
             {
@@ -296,57 +331,7 @@ namespace SE_Coursework.Classes
             header = sender = subject = text = string.Empty;
         }
         
-        //// Adds SMS and Tweets to the list
-        //private void AddMessageToList(string header, string sender, string text)
-        //{
-        //    MessageClass message = new MessageClass()
-        //    {
-        //        Header = header,
-        //        Sender = sender,                
-        //        MessageText = text
-        //    };
-        //    listOfMessages.Add(message);
-            
-
-        //    if (header[0].Equals("T"))
-        //    {
-        //        MessageBox.Show("Tweet Saved.");
-        //    }
-
-        //    if (header[0].Equals("S"))
-        //    {
-        //        MessageBox.Show("SMS Saved.");
-        //    }
-        //}
-
-
-        //// Adds Email to the list
-        //private void AddMessageToList(string header, string sender, string subject, string text)
-        //{
-        //    MessageClass message = new MessageClass()
-        //    {
-        //        Header = header,
-        //        Sender = sender,
-        //        Subject = subject,
-        //        MessageText = text
-        //    };
-
-            
-        //    listOfMessages.Add(message);
-
-        //    if (header[0].Equals("T"))
-        //    {
-        //        MessageBox.Show("Tweet Saved.");
-        //    }
-        //    if (header[0].Equals("S"))
-        //    {
-        //        MessageBox.Show("SMS Saved.");
-        //    }
-        //    if (header[0].Equals("E"))
-        //    {
-        //        MessageBox.Show("Email Saved.");
-        //    }
-        //}
+        
 
 
         public void RetrieveStoredList()
@@ -369,6 +354,7 @@ namespace SE_Coursework.Classes
             }
 
         }    
+
 
         #region User's Choice Validation Methods
 

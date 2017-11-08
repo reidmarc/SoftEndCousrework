@@ -8,24 +8,46 @@ namespace SE_Coursework.Classes
 {
     public class ProcessingClass
     {
+        string headerCheck = string.Empty;
+
+        public void MessageProcessing(string header, ref string text)
+        {
+            headerCheck = header[0].ToString();
+
+            if (headerCheck.Equals("S"))
+            {
+                ProccessedSms(ref text);
+            }
+
+            if (headerCheck.Equals("E"))
+            {
+                ProccessedEmail(ref text);
+            }
+
+            if (headerCheck.Equals("T"))
+            {
+                ProccessedTweet(ref text);
+            }            
+        }
 
 
-        public void SmsProcessing(string inputText)
+
+        private void ProccessedSms(ref string proText)
+        {
+
+        }
+
+        private void ProccessedEmail(ref string proText)
+        {
+
+        }
+
+        private void ProccessedTweet(ref string proText)
         {
 
         }
 
 
-        public void EmailProcessing(string inputText)
-        {
-
-        }
-
-
-        public void TweetProcessing(string inputText)
-        {
-
-        }
 
     }
 }

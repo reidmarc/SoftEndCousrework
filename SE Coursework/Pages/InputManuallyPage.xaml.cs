@@ -23,9 +23,12 @@ namespace SE_Coursework.Pages
     {
         ValidationClass validation = new ValidationClass();
         JsonClass json = new JsonClass();
+        ProcessingClass processing = new ProcessingClass();
 
         
-        
+
+
+
 
 
         public InputManuallyPage()
@@ -37,6 +40,8 @@ namespace SE_Coursework.Pages
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
+            
+
             string path = @".\EustonLeisureMessages.json";
 
             validation.AddMessageToList();
@@ -46,6 +51,16 @@ namespace SE_Coursework.Pages
             json.Serialize(validation.listOfMessages, path);
 
             saveButton.IsEnabled = false;
+
+            validation.EndOfCycle();
+
+            convertedMessageHeaderTxt.Text = string.Empty;
+            convertedMessageSenderTxt.Text = string.Empty;
+            convertedMessageSubjectTxt.Text = string.Empty;
+            convertedMessageBodyTxt.Text = string.Empty;
+            messageHeaderTxt.Text = string.Empty;
+            messageBodyTxt.Text = string.Empty;
+
 
         }
 
@@ -68,6 +83,21 @@ namespace SE_Coursework.Pages
             }
 
             saveButton.IsEnabled = true;
+
+            
+            string text = validation.Text;
+            string header = validation.Header;
+
+
+            processing.MessageProcessing(header, ref text);
+
+
+            convertedMessageHeaderTxt.Text = validation.Header;
+            convertedMessageSenderTxt.Text = validation.Sender;
+            convertedMessageSubjectTxt.Text = validation.Subject;
+            convertedMessageBodyTxt.Text = text;
+
+            
         }
 
 
