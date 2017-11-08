@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel.DataAnnotations;
 
 namespace SE_Coursework.Classes
 {
@@ -16,9 +17,15 @@ namespace SE_Coursework.Classes
         bool emailMessage = false;
         bool tweetMessage = false;
 
-        string header;
 
-        public List<MessageClass> listOfMessages = new List<MessageClass>();        
+        string header = string.Empty;
+        string sender = string.Empty;
+        string text = string.Empty;
+        string subject = string.Empty;
+        string name = string.Empty;
+
+        public List<MessageClass> listOfMessages = new List<MessageClass>();
+        
 
         //public string Header { get; set; }
         //public string Sender { get; set; }
@@ -45,7 +52,7 @@ namespace SE_Coursework.Classes
             // Stores the first character of inputText as the string _inputText
             string _inputText = inputText[0].ToString();
 
-            // Trims the input then stores it as the string numeric
+            // Trims the input then stores it as the string header
             header = inputText.Trim();
 
             // Stores a substring of numeric as the string subStringNumeric
@@ -89,43 +96,71 @@ namespace SE_Coursework.Classes
 
         public bool MessageBodyInputValidation(string inputText)
         {
-            string sender = string.Empty;            
+            bool smsCheck = true;
+                        
+            string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
+            
+
+            EmailAddressAttribute emailAddressCheck = new EmailAddressAttribute();
+            PhoneAttribute phoneNumberCheck = new PhoneAttribute();
+
 
             // SMS
             if (smsMessage.Equals(true))
             {
-                string smsPattern = @"^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$";
+                //string smsPattern = @"^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$";
 
-                Regex myRegex = new Regex(smsPattern, RegexOptions.None);
+                //Regex myRegex = new Regex(smsPattern, RegexOptions.None);
 
-                sender = myRegex.Replace(inputText, string.Empty);
+                //sender = myRegex.Replace(inputText, string.Empty);
 
-                MessageBox.Show(sender);
+                //MessageBox.Show(sender);
 
-              
+                
 
-
-
-                MessageClass message = new MessageClass()
+                while (smsCheck)
                 {
-                    Header = header,
-                    Sender = sender,
-                    MessageText = inputText
-                };
+                    for (int i = 15; i > 7; i--)
+                    {
+                        sender = inputText.Trim().Substring(0, i);
+
+                        if (phoneNumberCheck.IsValid(sender))
+                        {
+
+                            text = inputText.Trim().Substring(i);
 
 
-                // Adds sms to the list
-                AddMessageToList(header, sender, inputText);
+                            smsCheck = false;
+                            break;
+                        }
 
-                MessageBox.Show("SMS Saved");
+                    }
+
+                    if (smsCheck.Equals(true))
+                    {
+                        MessageBox.Show("The phone number entered, is not a valid phone number.");
+                        return false;
+                    }
+
+                }
+
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////// MESSAGE PROCESSING GOES HERE //////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                MessageBox.Show("SMS Converted");
 
                 return true;
             }
 
             // EMAIL
             if (emailMessage.Equals(true))
-            {
-                string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
+            {                
                 Regex myRegex = new Regex(emailPattern, RegexOptions.None);
 
                 Match myMatch = myRegex.Match(inputText);
@@ -133,7 +168,19 @@ namespace SE_Coursework.Classes
                 if (myMatch.Success)
                 {
                     sender = myMatch.Value;
-                }  
+
+                    // Checks if the email is a valid email address
+                    if (!emailAddressCheck.IsValid(sender))
+                    {
+                        MessageBox.Show("You have entered an incorrect email address.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You have entered an incorrect email address.");
+                    return false;
+                }
 
                 // Removes the email address from the string and replaces it with a '|'
                 string newInputText = myRegex.Replace(inputText, "|");
@@ -149,17 +196,22 @@ namespace SE_Coursework.Classes
                 }
 
                 // Creates the string name from the part of splitText before the '|'
-                string emailName = splitText[0];
+                name = splitText[0];
 
                 // Creates substrings from newInputText
-                string emailSubject = splitText[1].Substring(0, 21);
-                string emailMessageText = splitText[1].Substring(21);
-                                
+                subject = splitText[1].Substring(0, 21);
+                text = splitText[1].Substring(21);
 
-                // Adds email to the list
-                AddMessageToList(header, sender, emailSubject, emailMessageText);
 
-                MessageBox.Show("Email Saved");
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////// MESSAGE PROCESSING GOES HERE //////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                MessageBox.Show("Email Coverted");
 
                 return true;
             }
@@ -185,18 +237,23 @@ namespace SE_Coursework.Classes
                 
 
                 // Removes the Twitter ID  from the string, leaving the tweet.
-                string tweetText = myRegex.Replace(inputText, string.Empty);
+                text = myRegex.Replace(inputText, string.Empty);
 
 
-                if (tweetText.Length > 140)
+                if (text.Length > 140)
                 {
                     return false;
                 }
-                
-                // Adds tweet to the list
-                AddMessageToList(header, sender, tweetText);
 
-                MessageBox.Show("Tweet Saved");
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////// MESSAGE PROCESSING GOES HERE //////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                MessageBox.Show("Tweet Converted");
 
 
                 return true;                
@@ -208,26 +265,8 @@ namespace SE_Coursework.Classes
         }
 
 
-        // Adds SMS and Tweets to the list
-        private void AddMessageToList(string header, string sender, string text)
-        {
-            MessageClass message = new MessageClass()
-            {
-                Header = header,
-                Sender = sender,                
-                MessageText = text
-            };
-
-            listOfMessages.Add(message);
-
-            MessageBox.Show("File added to the list.");
-
-
-        }
-
-
-        // Adds Email to the list
-        private void AddMessageToList(string header, string sender, string subject, string text)
+        // Adds message to the list
+        public void AddMessageToList()
         {
             MessageClass message = new MessageClass()
             {
@@ -237,24 +276,96 @@ namespace SE_Coursework.Classes
                 MessageText = text
             };
 
+
             listOfMessages.Add(message);
 
-            MessageBox.Show("File added to the list.");
+            if (header[0].ToString().Equals("T"))
+            {
+                MessageBox.Show("Tweet Saved.");
+            }
+            if (header[0].ToString().Equals("S"))
+            {
+                MessageBox.Show("SMS Saved.");
+            }
+            if (header[0].ToString().Equals("E"))
+            {
+                MessageBox.Show("Email Saved.");
+            }
 
 
+            header = sender = subject = text = string.Empty;
         }
+        
+        //// Adds SMS and Tweets to the list
+        //private void AddMessageToList(string header, string sender, string text)
+        //{
+        //    MessageClass message = new MessageClass()
+        //    {
+        //        Header = header,
+        //        Sender = sender,                
+        //        MessageText = text
+        //    };
+        //    listOfMessages.Add(message);
+            
+
+        //    if (header[0].Equals("T"))
+        //    {
+        //        MessageBox.Show("Tweet Saved.");
+        //    }
+
+        //    if (header[0].Equals("S"))
+        //    {
+        //        MessageBox.Show("SMS Saved.");
+        //    }
+        //}
+
+
+        //// Adds Email to the list
+        //private void AddMessageToList(string header, string sender, string subject, string text)
+        //{
+        //    MessageClass message = new MessageClass()
+        //    {
+        //        Header = header,
+        //        Sender = sender,
+        //        Subject = subject,
+        //        MessageText = text
+        //    };
+
+            
+        //    listOfMessages.Add(message);
+
+        //    if (header[0].Equals("T"))
+        //    {
+        //        MessageBox.Show("Tweet Saved.");
+        //    }
+        //    if (header[0].Equals("S"))
+        //    {
+        //        MessageBox.Show("SMS Saved.");
+        //    }
+        //    if (header[0].Equals("E"))
+        //    {
+        //        MessageBox.Show("Email Saved.");
+        //    }
+        //}
 
 
         public void RetrieveStoredList()
-        { 
+        {
+            int counter = 0;
+
             try
             {
                 // Returns the list that is stored as JSON             
                 listOfMessages = jsonClass.Deserialize();
+
+                counter = counter + 1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                if (counter > 0)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
 
         }    

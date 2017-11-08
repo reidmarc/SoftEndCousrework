@@ -24,12 +24,16 @@ namespace SE_Coursework.Pages
         ValidationClass validation = new ValidationClass();
         JsonClass json = new JsonClass();
 
+        List<MessageClass> listOfMessages = new List<MessageClass>();
 
+        int displayCounter = 0;       
 
         public ViewMessagesPage()
         {
             InitializeComponent();
-            DisplayNewMessage();
+            RetrieveStoredList();
+            DisplayInitialMessage();
+            
         }
 
 
@@ -37,7 +41,12 @@ namespace SE_Coursework.Pages
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-            DisplayNewMessage();
+            DisplayNextMessage();            
+        }
+
+        private void previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayPreviousMessage();
         }
 
         #endregion
@@ -67,16 +76,88 @@ namespace SE_Coursework.Pages
 
 
         #region Private Methods
-
-        private void DisplayNewMessage()
+        
+        private void DisplayInitialMessage()
         {
-            //MessageClass message = json.Deserialize();            
-            
-            //messageHeaderTxt.Text = message.Header;
-            //messageBodyTxt.Text = message.MessageText;    
+            if (displayCounter < (listOfMessages.Count - 1))
+            {    
+                messageHeaderTxt.Text = listOfMessages[displayCounter].Header;
+                messageSenderTxt.Text = listOfMessages[displayCounter].Sender;
+                messageSubjectTxt.Text = listOfMessages[displayCounter].Subject;
+                messageBodyTxt.Text = listOfMessages[displayCounter].MessageText;
+
+            }
+            else
+            {
+                MessageBox.Show("There are no more messages in the list to view.");
+            }
+
+        }
+
+
+        private void DisplayNextMessage()
+        {
+            if (displayCounter < (listOfMessages.Count - 1))
+            {
+                displayCounter = displayCounter + 1;
+
+                messageHeaderTxt.Text = listOfMessages[displayCounter].Header;
+                messageSenderTxt.Text = listOfMessages[displayCounter].Sender;
+                messageSubjectTxt.Text = listOfMessages[displayCounter].Subject;
+                messageBodyTxt.Text = listOfMessages[displayCounter].MessageText;
+
+            }
+            else
+            {
+                MessageBox.Show("There are no more messages in the list to view.");
+            }
+        }
+
+        private void DisplayPreviousMessage()
+        {            
+            if (displayCounter > 0)
+            {
+                displayCounter = displayCounter - 1;
+
+                messageHeaderTxt.Text = listOfMessages[displayCounter].Header;
+                messageSenderTxt.Text = listOfMessages[displayCounter].Sender;
+                messageSubjectTxt.Text = listOfMessages[displayCounter].Subject;
+                messageBodyTxt.Text = listOfMessages[displayCounter].MessageText;
+
+            }
+            else
+            {
+                MessageBox.Show("You are at the start of the list.");
+            }            
+        }
+
+
+        public void RetrieveStoredList()
+        {
+            int counter = 0;
+
+            try
+            {
+                // Returns the list that is stored as JSON             
+                listOfMessages = json.Deserialize();
+
+                counter = counter + 1;
+
+
+                
+            }
+            catch (Exception ex)
+            {
+                if (counter > 0)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
         }
 
         #endregion
 
+       
     }
 }

@@ -23,6 +23,8 @@ namespace SE_Coursework.Pages
     {
         ValidationClass validation = new ValidationClass();
         JsonClass json = new JsonClass();
+
+        
         
 
 
@@ -37,9 +39,13 @@ namespace SE_Coursework.Pages
         {
             string path = @".\EustonLeisureMessages.json";
 
+            validation.AddMessageToList();
+
 
             // Converts the whole list of messages into JSON and stores it
             json.Serialize(validation.listOfMessages, path);
+
+            saveButton.IsEnabled = false;
 
         }
 
@@ -60,6 +66,8 @@ namespace SE_Coursework.Pages
                 messageBodyTxt.Focus();
                 return;
             }
+
+            saveButton.IsEnabled = true;
         }
 
 
