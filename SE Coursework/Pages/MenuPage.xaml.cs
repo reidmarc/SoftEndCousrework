@@ -65,15 +65,25 @@ namespace SE_Coursework.Pages
 
         private void exportJsonButton_Click(object sender, RoutedEventArgs e)
         {
-            menuValidation.RetrieveStoredList();
+            try
+            {
+                menuValidation.RetrieveStoredList();
 
-            // Sets a string as the path for where to store the JSON file.
-            string path = @"C:\Users\reidm\Desktop\EustonLeisureMessages.json";
-            
+                // Sets a string as the path for where to store the JSON file.
+                //string path = @"C:\Users\reidm\Desktop\EustonLeisureMessages.json";
+                //string path = @"C:\Users\03001588\Desktop\EustonLeisureMessages.json"; 
 
-            jsonClass.Serialize(menuValidation.listOfMessages, path);
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "/EustonLeisureMessages.json";
 
-            MessageBox.Show("JSON Exported");
+
+                jsonClass.Serialize(menuValidation.listOfMessages, path);
+
+                MessageBox.Show("JSON Exported");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
 

@@ -109,7 +109,9 @@ namespace SE_Coursework.Classes
 
             // SMS
             if (smsMessage.Equals(true))
-            {   
+            {
+                smsMessage = false;
+
                 while (smsCheck)
                 {
                     if (inputText.Length > 15)
@@ -146,6 +148,8 @@ namespace SE_Coursework.Classes
             // EMAIL
             if (emailMessage.Equals(true))
             {
+                emailMessage = false;
+
                 Regex myRegex = new Regex(emailPattern, RegexOptions.None);
 
                 Match myMatch = myRegex.Match(inputText);
@@ -195,6 +199,10 @@ namespace SE_Coursework.Classes
             // TWEET
             if (tweetMessage.Equals(true))
             {
+                tweetMessage = false;
+
+                // remove regex and use similar to method on processing class
+
                 string tweetPattern = @"^((@\w+)\s)+";
 
                 Regex myRegex = new Regex(tweetPattern, RegexOptions.None);
