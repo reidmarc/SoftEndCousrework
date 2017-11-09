@@ -25,12 +25,15 @@ namespace SE_Coursework.Pages
         JsonClass json = new JsonClass();
         ProcessingClass processing = new ProcessingClass();
 
+        
+
         private string processedText = string.Empty;
 
         public InputManuallyPage()
         {
             InitializeComponent();
             validation.RetrieveStoredList();
+            processing.GetTextWords();
         }
 
 
@@ -58,9 +61,10 @@ namespace SE_Coursework.Pages
             
             string text = validation.Text;
             string header = validation.Header;
+            string subject = validation.Subject;
 
 
-            processing.MessageProcessing(header, ref text);
+            processing.MessageProcessing(header, ref text, subject);
 
 
             convertedMessageHeaderTxt.Text = validation.Header;
@@ -98,6 +102,10 @@ namespace SE_Coursework.Pages
 
 
         }
+
+
+
+       
 
 
 

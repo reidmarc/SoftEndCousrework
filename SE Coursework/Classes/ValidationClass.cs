@@ -199,33 +199,36 @@ namespace SE_Coursework.Classes
             // TWEET
             if (tweetMessage.Equals(true))
             {
-                tweetMessage = false;
+                tweetMessage = false; 
 
-                // remove regex and use similar to method on processing class
-
-                string tweetPattern = @"^((@\w+)\s)+";
-
-                Regex myRegex = new Regex(tweetPattern, RegexOptions.None);
-
-                Match myMatch = myRegex.Match(inputText);
-
-                if (myMatch.Value.Length > 17)
+                string[] splitProText = inputText.Trim().Split(' ');
+                
+                if (splitProText[0].StartsWith("@") && splitProText[0].Length < 16)
                 {
+                    sender = splitProText[0];
+                    splitProText[0] = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("You have entered an incorrect Twitter ID.\nPlease check and try again.");
                     return false;
                 }
 
-                if (myMatch.Success)
+
+                // Concatenate all the elements into a StringBuilder.
+                StringBuilder builder = new StringBuilder();
+                foreach (string value in splitProText)
                 {
-                    sender = myMatch.Value;
+                    builder.Append(value);
+                    builder.Append(' ');
                 }
 
-
-                // Removes the Twitter ID  from the string, leaving the tweet.
-                text = myRegex.Replace(inputText, string.Empty);
+                text = builder.ToString().Trim();               
 
 
                 if (text.Length > 140)
                 {
+                    MessageBox.Show("The tweet text is more than 140 characters in length.");
                     return false;
                 }
 

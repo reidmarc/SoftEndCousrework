@@ -25,6 +25,10 @@ namespace SE_Coursework.Pages
 
         ValidationClass menuValidation = new ValidationClass();
         JsonClass jsonClass = new JsonClass();
+        ProcessingClass menuProcessing = new ProcessingClass();
+
+        
+
 
         #endregion
 
@@ -32,10 +36,14 @@ namespace SE_Coursework.Pages
 
         public MenuPage()
         {
-            InitializeComponent(); 
-        }
+            InitializeComponent();          
+
+        }      
 
         #endregion
+
+        
+
 
         #region Click Events
 

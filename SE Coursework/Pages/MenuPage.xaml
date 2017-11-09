@@ -37,17 +37,17 @@
         <!-- Trending List-->
         <Label Content="Trending" HorizontalAlignment="Left" Margin="534,243,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
         <Separator HorizontalAlignment="Left" Height="30" Margin="534,257,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox HorizontalAlignment="Left" Height="214" Margin="534,292,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="trendingListBox" HorizontalAlignment="Left" Height="214" Margin="534,292,0,0" VerticalAlignment="Top" Width="100"/>
 
         <!-- Mentions List-->
         <Label Content="Mentions" HorizontalAlignment="Left" Margin="681,243,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
         <Separator HorizontalAlignment="Left" Height="30" Margin="681,257,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox HorizontalAlignment="Left" Height="214" Margin="681,292,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="mentionsListBox" HorizontalAlignment="Left" Height="214" Margin="681,292,0,0" VerticalAlignment="Top" Width="100"/>
 
         <!-- SIR List-->
         <Label Content="SIR" HorizontalAlignment="Left" Margin="822,243,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
         <Separator HorizontalAlignment="Left" Height="30" Margin="822,257,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox HorizontalAlignment="Left" Height="214" Margin="822,292,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="sirListBox" HorizontalAlignment="Left" Height="214" Margin="822,292,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Page>
