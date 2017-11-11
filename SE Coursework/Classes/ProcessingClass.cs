@@ -144,11 +144,11 @@ namespace SE_Coursework.Classes
         private void FindHashTags(string proText)
         {
             string[] splitProText = proText.Split(' ');
-            bool entryExists = false;
+            bool hashtagExists = false;
 
             for (int i = 0; i < splitProText.Length; i++)
             {
-                entryExists = false;
+                hashtagExists = false;
 
                 if (splitProText[i].StartsWith("#"))
                 {
@@ -162,12 +162,12 @@ namespace SE_Coursework.Classes
                         {
                             hashtagDictionary[splitProText[i]] = hashtagDictionary[splitProText[i]] + 1;
                             MessageBox.Show("Updated a hashtag entry");
-                            entryExists = true;
+                            hashtagExists = true;
                         }
 
                     }
 
-                    if (entryExists.Equals(false))
+                    if (hashtagExists.Equals(false))
                     {
                         hashtagDictionary.Add(splitProText[i], 1);
                         MessageBox.Show("Found a hashtag");
@@ -179,14 +179,34 @@ namespace SE_Coursework.Classes
         private void FindMentions(string proText)
         {
             string[] splitProText = proText.Split(' ');
+            bool mentionExists = false;
 
 
             for (int i = 0; i < splitProText.Length; i++)
             {
+                mentionExists = false;
+
                 if (splitProText[i].StartsWith("@"))
                 {
-                    mentionsDictionary.Add(splitProText[i], 1);
-                    MessageBox.Show("Found a mention");
+
+                    for (int w = 0; w < mentionsDictionary.Count; w++)
+                    {
+                        var mentionElement = mentionsDictionary.ElementAt(w);
+
+
+                        if (mentionElement.Key.Equals(splitProText[i]))
+                        {
+                            mentionsDictionary[splitProText[i]] = mentionsDictionary[splitProText[i]] + 1;
+                            MessageBox.Show("Updated a mention entry");
+                            mentionExists = true;
+                        }
+                    }
+
+                    if (mentionExists.Equals(false))
+                    {
+                        mentionsDictionary.Add(splitProText[i], 1);
+                        MessageBox.Show("Found a mention");
+                    }
                 }
             }
         }

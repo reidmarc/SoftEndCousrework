@@ -35,7 +35,7 @@ namespace SE_Coursework.Pages
 
 
         List<string> hashTagList = new List<string>();
-
+        List<string> mentionsList = new List<string>();
 
         #endregion
 
@@ -45,6 +45,7 @@ namespace SE_Coursework.Pages
         {
             InitializeComponent();
             RetrieveHashTags();
+            RetrieveMentions();
 
         }
 
@@ -158,18 +159,18 @@ namespace SE_Coursework.Pages
 
             hashTagList = BubbleSort(hashTagList);
 
-            int counter = hashTagList.Count;
+            int hashtagCounter = hashTagList.Count;
 
 
             foreach (var entry in hashTagList)
             {
-                if (counter > 0)
+                if (hashtagCounter > 0)
                 {
                     
-                    trendingListBox.Items.Add(hashTagList[(counter - 1)]);
+                    trendingListBox.Items.Add(hashTagList[(hashtagCounter - 1)]);
                     
 
-                    counter = counter - 1;
+                    hashtagCounter = hashtagCounter - 1;
                 }
             }
         }
@@ -178,7 +179,59 @@ namespace SE_Coursework.Pages
 
         #region Mentions ListBox
 
-        // Logic here
+       private void RetrieveMentions()
+        {
+            using (var reader = new StreamReader(@".\mentions.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line.Contains("@") && line.Count() < 20)
+                    {
+                        string lineString = line.ToString();
+
+
+                        int firstSpaceIndex = lineString.Trim().IndexOf(",");
+                        string keyString = lineString.Substring(0, firstSpaceIndex);
+                        string valueString = lineString.Substring(firstSpaceIndex + 1);
+
+                        Int32.TryParse(valueString, out int valueInt);
+
+                        mentionsDictionary.Add(keyString.Trim(), valueInt);
+                    }
+                }
+            }
+
+            UpdateMentionsListBox();
+        }
+
+
+        private void UpdateMentionsListBox()
+        {            
+
+            foreach (KeyValuePair<string, int> mention in mentionsDictionary)
+            {
+                mentionsList.Add(String.Format("[{0}] - {1}", mention.Value.ToString(), mention.Key));
+            }
+
+            mentionsList = BubbleSort(mentionsList);
+
+            int mentionsCounter = mentionsList.Count;
+
+
+            foreach (var entry in mentionsList)
+            {
+                if (mentionsCounter > 0)
+                {
+                    
+                    mentionsListBox.Items.Add(mentionsList[(mentionsCounter - 1)]);
+                    
+
+                    mentionsCounter = mentionsCounter - 1;
+                }
+            }
+        }
 
         #endregion
 
