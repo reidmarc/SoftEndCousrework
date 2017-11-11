@@ -14,11 +14,11 @@ namespace SE_Coursework.Classes
     {
         Dictionary<string, string> textWordsDictionary = new Dictionary<string, string>();
         Dictionary<string, string> sirDictionary = new Dictionary<string, string>();
-        List<string> listOfMentions = new List<string>();
-        List<string> listOfHashTags = new List<string>();        
+        Dictionary<string, int> mentionsDictionary = new Dictionary<string, int>();
+        Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();        
         List<string> listQuarantine = new List<string>();
 
-
+        
 
 
         string headerCheck = string.Empty;
@@ -27,12 +27,14 @@ namespace SE_Coursework.Classes
 
         public ProcessingClass()
         {
-           
+            
 
         }
 
         #endregion
 
+        #region Public Methods
+        
         public void GetTextWords()
         {
             using (var reader = new StreamReader(@".\textwords.csv"))
@@ -58,7 +60,7 @@ namespace SE_Coursework.Classes
 
 
 
-        #region Message Processing
+        
 
         public void MessageProcessing(string header, ref string text, string subject)
         {
@@ -80,7 +82,9 @@ namespace SE_Coursework.Classes
             }            
         }
 
+        #endregion
 
+        #region Private Methods
 
         private void ProccessedSms(ref string proText)
         {      
@@ -93,27 +97,18 @@ namespace SE_Coursework.Classes
         {
             FindURL(ref proText);
 
-
             if (subject.Trim().StartsWith("SIR"))
             {
                 MessageBox.Show("Found SIR");
-            }
-
-            GetSportCentreCodeAndNatureOfIncident(proText);
-
-
-
-
-
+                GetSportCentreCodeAndNatureOfIncident(proText);
+            } 
 
             MessageBox.Show("Processing EMAIL");
         }
 
         private void ProccessedTweet(ref string proText)
         {
-            TextSpeakAbbreviations(ref proText);
-            FindMentions(proText);
-            FindHashTags(proText);
+            TextSpeakAbbreviations(ref proText);   
 
             MessageBox.Show("Processing TWEET");
         }
@@ -149,14 +144,34 @@ namespace SE_Coursework.Classes
         private void FindHashTags(string proText)
         {
             string[] splitProText = proText.Split(' ');
-
+            bool entryExists = false;
 
             for (int i = 0; i < splitProText.Length; i++)
             {
+                entryExists = false;
+
                 if (splitProText[i].StartsWith("#"))
                 {
-                    listOfHashTags.Add(splitProText[i]);
-                    MessageBox.Show("Found a hashtag");
+                   
+                    for (int q = 0; q < hashtagDictionary.Count; q++)
+                    {
+                        var hashtagElement = hashtagDictionary.ElementAt(q);
+
+
+                        if (hashtagElement.Key.Equals(splitProText[i]))
+                        {
+                            hashtagDictionary[splitProText[i]] = hashtagDictionary[splitProText[i]] + 1;
+                            MessageBox.Show("Updated a hashtag entry");
+                            entryExists = true;
+                        }
+
+                    }
+
+                    if (entryExists.Equals(false))
+                    {
+                        hashtagDictionary.Add(splitProText[i], 1);
+                        MessageBox.Show("Found a hashtag");
+                    }
                 }
             }
         }
@@ -170,7 +185,7 @@ namespace SE_Coursework.Classes
             {
                 if (splitProText[i].StartsWith("@"))
                 {
-                    listOfMentions.Add(splitProText[i]);
+                    mentionsDictionary.Add(splitProText[i], 1);
                     MessageBox.Show("Found a mention");
                 }
             }
@@ -229,30 +244,99 @@ namespace SE_Coursework.Classes
                     incident = s;
                 }
             }
-
-
-
            
-            sirDictionary.Add(code, incident);
-            
-                    
+            sirDictionary.Add(code, incident);       
+        }
+
+        private void AddHashTagToDictionaryToFile()
+        {        
+            using (var writer = new StreamWriter(@".\hashtags.csv"))
+            {
+                foreach (var pair in hashtagDictionary)
+                {
+                    writer.WriteLine("{0},{1}", pair.Key, pair.Value);
+                }
+            }            
+        }
+
+
+
+        private void AddMentionsToDictionaryToFile()
+        {  
+            using (var writer = new StreamWriter(@".\mentions.csv"))
+            {
+                foreach (var pair in mentionsDictionary)
+                {
+                    writer.WriteLine("{0},{1}", pair.Key, pair.Value);
+                }
+            }           
+        }
+
+
+        public void GetHashTags()
+        {
+            using (var reader = new StreamReader(@".\hashtags.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line.Contains("#") && line.Count() < 50)
+                    {
+                        string lineString = line.ToString();
+
+
+                        int firstSpaceIndex = lineString.Trim().IndexOf(",");
+                        string keyString = lineString.Substring(0, firstSpaceIndex);
+                        string valueString = lineString.Substring(firstSpaceIndex + 1);
+
+                        Int32.TryParse(valueString, out int valueInt);
+
+                        hashtagDictionary.Add(keyString.Trim(), valueInt);
+                    }
+                }
+
+            }
+        }
+
+        public void GetMentions()
+        {
+            using (var reader = new StreamReader(@".\mentions.csv"))
+            {
                 
-            
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line.Contains("@") && line.Count() < 16)
+                    {
+                        string lineString = line.ToString();
+
+
+
+                        int firstSpaceIndex = lineString.Trim().IndexOf(",");
+                        string keyString = lineString.Substring(0, firstSpaceIndex);
+                        string valueString = lineString.Substring(firstSpaceIndex + 1);
+
+                        Int32.TryParse(valueString, out int valueInt);
+
+                        mentionsDictionary.Add(keyString.Trim(), valueInt);
+                    }
+                    
+                }
+
+            }
         }
 
-        public List<string> GetMentionsList()
-        {
-            return listOfMentions;
+        public void SearchForHashTagsAndMentions(string proText)
+        {            
+            FindMentions(proText);
+            FindHashTags(proText);
+            AddHashTagToDictionaryToFile();
+            AddMentionsToDictionaryToFile();            
         }
 
-        public List<string> GetHashTagList()
-        {
-            return listOfHashTags;
-        }
-
-
-
-        #endregion
+        #endregion  
 
     }
 }

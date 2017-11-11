@@ -1,6 +1,7 @@
 ﻿using SE_Coursework.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,12 @@ namespace SE_Coursework.Pages
         JsonClass jsonClass = new JsonClass();
         ProcessingClass menuProcessing = new ProcessingClass();
 
-        
+        Dictionary<string, string> sirDictionary = new Dictionary<string, string>();
+        Dictionary<string, int> mentionsDictionary = new Dictionary<string, int>();
+        Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();
+
+
+        List<string> hashTagList = new List<string>();
 
 
         #endregion
@@ -36,13 +42,59 @@ namespace SE_Coursework.Pages
 
         public MenuPage()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            RetrieveHashTags();
 
         }      
 
         #endregion
 
-        
+        private void RetrieveHashTags()
+        {
+            using (var reader = new StreamReader(@".\hashtags.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line.Contains("#") && line.Count() < 50)
+                    {
+                        string lineString = line.ToString();
+
+
+                        int firstSpaceIndex = lineString.Trim().IndexOf(",");
+                        string keyString = lineString.Substring(0, firstSpaceIndex);
+                        string valueString = lineString.Substring(firstSpaceIndex + 1);
+
+                        Int32.TryParse(valueString, out int valueInt);
+
+                        hashtagDictionary.Add(keyString.Trim(), valueInt);
+                    }
+                }
+            }
+
+            UpdateHashTagListBox();
+        }
+
+        private void UpdateHashTagListBox()
+        {            
+            foreach (KeyValuePair<string, int> hashtag in hashtagDictionary)
+            {
+                hashTagList.Add(String.Format("[{0}] - {1}", hashtag.Value.ToString(), hashtag.Key));
+            }
+
+            hashTagList.Sort();
+
+            if (hashTagList.Count() > 0)
+            {
+                for (int i = 5; i > 0; i--)
+                {
+                    trendingListBox.Items.Add(hashTagList[i]);
+                }
+            }
+
+            
+        }
 
 
         #region Click Events

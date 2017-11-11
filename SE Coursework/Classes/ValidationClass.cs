@@ -23,6 +23,7 @@ namespace SE_Coursework.Classes
         string text = string.Empty;
         string subject = string.Empty;
         string name = string.Empty;
+        
 
         public List<MessageClass> listOfMessages = new List<MessageClass>();
 
@@ -98,9 +99,9 @@ namespace SE_Coursework.Classes
 
         public bool MessageBodyInputValidation(string inputText)
         {
-            bool smsCheck = true;
+            
 
-            string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
+            //string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
 
 
             EmailAddressAttribute emailAddressCheck = new EmailAddressAttribute();
@@ -110,6 +111,7 @@ namespace SE_Coursework.Classes
             // SMS
             if (smsMessage.Equals(true))
             {
+                bool smsCheck = true;
                 smsMessage = false;
 
                 while (smsCheck)
@@ -131,8 +133,24 @@ namespace SE_Coursework.Classes
                             }
                         }
                     }
+                    else if (inputText.Length > 7 && inputText.Length < 16)
+                    {
+                        for (int i = inputText.Length; i > 7; i--)
+                        {
+                            sender = inputText.Trim().Substring(0, i);
 
-                    if (smsCheck.Equals(true))
+                            if (phoneNumberCheck.IsValid(sender))
+                            {
+
+                                text = inputText.Trim().Substring(i);
+
+
+                                smsCheck = false;
+                                break;
+                            }
+                        }
+                    }
+                    else
                     {
                         MessageBox.Show("The phone number entered, is not a valid phone number.");
                         return false;
@@ -150,46 +168,85 @@ namespace SE_Coursework.Classes
             {
                 emailMessage = false;
 
-                Regex myRegex = new Regex(emailPattern, RegexOptions.None);
+                string[] splitProText = inputText.Trim().Split(' ');
 
-                Match myMatch = myRegex.Match(inputText);
+                string[] nameArray = { };
+                string[] subjectAndTextArray = { };
 
-                if (myMatch.Success)
+
+                string subjectAndText = string.Empty;
+                bool emailAddressFound = false;
+
+
+
+                for (int i = 0; i < splitProText.Length; i++)
                 {
-                    sender = myMatch.Value;
-
-                    // Checks if the email is a valid email address
-                    if (!emailAddressCheck.IsValid(sender))
+                    if (splitProText[i].Contains("@"))
                     {
-                        MessageBox.Show("You have entered an incorrect email address.");
-                        return false;
-                    }
+                        // Checks if the email is a valid email address
+                        if (emailAddressCheck.IsValid(splitProText[i]))
+                        {
+                            emailAddressFound = true;
+                            sender = splitProText[i];
+                            splitProText[i] = "";
+
+                            nameArray = splitProText.Take(i).ToArray();
+                            subjectAndTextArray = splitProText.Skip(i).ToArray();
+
+                            break;                           
+                        }                        
+                    }                    
                 }
-                else
+
+                if (emailAddressFound.Equals(false))
                 {
                     MessageBox.Show("You have entered an incorrect email address.");
                     return false;
                 }
 
-                // Removes the email address from the string and replaces it with a '|'
-                string newInputText = myRegex.Replace(inputText, "|");
 
-                // Splits the string in 2 based on the delimiter '|'
-                string[] splitText = newInputText.Split('|');
+
+                // Concatenate all the elements into a StringBuilder.
+                StringBuilder nameBuilder = new StringBuilder();
+                foreach (string value in nameArray)
+                {
+                    nameBuilder.Append(value);
+                    nameBuilder.Append(' ');
+                }
+
+                name = nameBuilder.ToString().Trim();
+
+
+                // Concatenate all the elements into a StringBuilder.
+                StringBuilder subjectAndTextBuilder = new StringBuilder();
+                foreach (string value in subjectAndTextArray)
+                {
+                    subjectAndTextBuilder.Append(value);
+                    subjectAndTextBuilder.Append(' ');
+                }
+
+                subjectAndText = subjectAndTextBuilder.ToString().Trim();
+
+
+
+
+
+
+
+
+
+                // Creates substrings from newInputText
+                subject = subjectAndText.Trim().Substring(0, 20);
+                text = subjectAndText.Trim().Substring(20);
+
+
 
                 // Checks the email doesn't exceed the maximum length
-                if (splitText[1].Length > 1048)
+                if (text.Length > 1048)
                 {
                     MessageBox.Show("This email is longer than 1028 max characters");
                     return false;
                 }
-
-                // Creates the string name from the part of splitText before the '|'
-                name = splitText[0];
-
-                // Creates substrings from newInputText
-                subject = splitText[1].Substring(0, 21);
-                text = splitText[1].Substring(21);
 
                 SetPublicVariable();
                 MessageBox.Show("Email Converted");                
@@ -336,6 +393,11 @@ namespace SE_Coursework.Classes
 
             if (yesOrNo == MessageBoxResult.Yes)
             {
+                File.WriteAllText(@".\hashtags.csv", String.Empty);
+                File.WriteAllText(@".\mentions.csv", String.Empty);
+
+                //File.Delete(@".\hashtags.csv");
+                //File.Delete(@".\mentions.csv");
                 Application.Current.Shutdown();
             }
 

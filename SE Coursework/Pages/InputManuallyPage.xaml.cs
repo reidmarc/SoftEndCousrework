@@ -34,6 +34,8 @@ namespace SE_Coursework.Pages
             InitializeComponent();
             validation.RetrieveStoredList();
             processing.GetTextWords();
+            processing.GetHashTags();
+            processing.GetMentions();
         }
 
 
@@ -73,15 +75,15 @@ namespace SE_Coursework.Pages
             convertedMessageBodyTxt.Text = text;
             processedText = text;
 
-            
+            //processing.addedAlready = true;
         }
 
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-
-
             string path = @".\EustonLeisureMessages.json";
+
+            processing.SearchForHashTagsAndMentions(processedText);
 
             validation.AddMessageToList(processedText);
 
@@ -100,7 +102,7 @@ namespace SE_Coursework.Pages
             messageHeaderTxt.Text = string.Empty;
             messageBodyTxt.Text = string.Empty;
 
-
+            //processing.addedAlready = false;
         }
 
 
