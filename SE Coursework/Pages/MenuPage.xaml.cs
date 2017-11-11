@@ -1,5 +1,6 @@
 ﻿using SE_Coursework.Classes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,9 +46,79 @@ namespace SE_Coursework.Pages
             InitializeComponent();
             RetrieveHashTags();
 
-        }      
+        }
 
         #endregion
+
+        #region Updating ListBoxes
+
+        #region Sorting List
+
+        private List<string> BubbleSort(List<String> list)
+        {
+            for (int i = 1; i < list.Count; i++)
+            {
+                for (int j = 0; j < list.Count - i; j++)
+                {
+                    string comparisonA = string.Empty;
+                    string comparisonB = string.Empty;
+                    int comparisonIntA = 0;
+                    int comparisonIntB = 0;
+
+
+
+                    string[] splitStringArrayA = list[j].Trim().Split('-');
+
+                    comparisonA = splitStringArrayA[0].Trim();
+
+                    if (comparisonA.Contains("["))
+                    {
+                        comparisonA = comparisonA.Replace("[", "");
+                    }
+
+                    if (comparisonA.Contains("]"))
+                    {
+                        comparisonA = comparisonA.Replace("]", "");
+                    }
+
+                    Int32.TryParse(comparisonA, out comparisonIntA);
+
+
+
+                    string[] splitStringArrayB = list[j + 1].Trim().Split('-');
+
+                    comparisonB = splitStringArrayB[0].Trim();
+
+
+                    if (comparisonB.Contains("["))
+                    {
+                        comparisonB = comparisonB.Replace("[", "");
+                    }
+
+                    if (comparisonB.Contains("]"))
+                    {
+                        comparisonB = comparisonB.Replace("]", "");
+                    }
+
+                    Int32.TryParse(comparisonB, out comparisonIntB);
+
+
+                    if (comparisonIntA > comparisonIntB)
+                    {
+                        string temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        #endregion
+
+        #region Trending / Hashtag ListBox
 
         private void RetrieveHashTags()
         {
@@ -76,26 +147,48 @@ namespace SE_Coursework.Pages
             UpdateHashTagListBox();
         }
 
+
         private void UpdateHashTagListBox()
         {            
+
             foreach (KeyValuePair<string, int> hashtag in hashtagDictionary)
             {
                 hashTagList.Add(String.Format("[{0}] - {1}", hashtag.Value.ToString(), hashtag.Key));
             }
 
-            hashTagList.Sort();
+            hashTagList = BubbleSort(hashTagList);
 
-            if (hashTagList.Count() > 0)
+            int counter = hashTagList.Count;
+
+
+            foreach (var entry in hashTagList)
             {
-                for (int i = 5; i > 0; i--)
+                if (counter > 0)
                 {
-                    trendingListBox.Items.Add(hashTagList[i]);
+                    
+                    trendingListBox.Items.Add(hashTagList[(counter - 1)]);
+                    
+
+                    counter = counter - 1;
                 }
             }
-
-            
         }
 
+        #endregion
+
+        #region Mentions ListBox
+
+        // Logic here
+
+        #endregion
+
+        #region SIR ListBox
+
+        // Logic here
+
+        #endregion
+
+        #endregion
 
         #region Click Events
 
@@ -129,9 +222,7 @@ namespace SE_Coursework.Pages
             {
                 menuValidation.RetrieveStoredList();
 
-                // Sets a string as the path for where to store the JSON file.
-                //string path = @"C:\Users\reidm\Desktop\EustonLeisureMessages.json";
-                //string path = @"C:\Users\03001588\Desktop\EustonLeisureMessages.json"; 
+                // Sets a string as the path for where to store the JSON file.                
 
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "/EustonLeisureMessages.json";
 

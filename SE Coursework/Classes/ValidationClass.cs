@@ -395,9 +395,7 @@ namespace SE_Coursework.Classes
             {
                 File.WriteAllText(@".\hashtags.csv", String.Empty);
                 File.WriteAllText(@".\mentions.csv", String.Empty);
-
-                //File.Delete(@".\hashtags.csv");
-                //File.Delete(@".\mentions.csv");
+                
                 Application.Current.Shutdown();
             }
 

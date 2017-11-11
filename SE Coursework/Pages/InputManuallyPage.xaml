@@ -22,7 +22,7 @@
 
         <!-- Message Header-->
         <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="34,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="S123456789" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
 
 
         <!-- Message Body-->

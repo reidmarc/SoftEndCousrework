@@ -255,7 +255,7 @@ namespace SE_Coursework.Classes
                 foreach (var pair in hashtagDictionary)
                 {
                     writer.WriteLine("{0},{1}", pair.Key, pair.Value);
-                }
+                }  
             }            
         }
 
