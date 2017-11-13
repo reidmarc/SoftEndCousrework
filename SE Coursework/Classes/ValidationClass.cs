@@ -1,45 +1,54 @@
-﻿using Newtonsoft.Json;
+﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// Class ValidationClass ///////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// Code Written By: ******************** ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Description: Class used to validate the information, input as phone number, email address, twitter ID's etc
+
+
+#region Usings
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace SE_Coursework.Classes
 {
     public class ValidationClass
     {
+        #region Objects / Data Structure / Variables
+
+        JsonClass jsonClass = new JsonClass();
+
+        public List<MessageClass> listOfMessages = new List<MessageClass>();
+
         bool smsMessage = false;
         bool emailMessage = false;
         bool tweetMessage = false;
-
 
         string header = string.Empty;
         string sender = string.Empty;
         string text = string.Empty;
         string subject = string.Empty;
         string name = string.Empty;
-        
-
-        public List<MessageClass> listOfMessages = new List<MessageClass>();
-
-        MessageClass messageToReturn;
 
         public string Header = string.Empty;
         public string Sender = string.Empty;
         public string Subject = string.Empty;
         public string Text = string.Empty;
 
+        //MessageClass messageToReturn;
 
+        #endregion
 
-
-
-        JsonClass jsonClass = new JsonClass();
-
+        #region Constructor
 
         // Default Constructor
         public ValidationClass()
@@ -47,8 +56,9 @@ namespace SE_Coursework.Classes
 
         }
 
+        #endregion
 
-
+        #region Public Methods
 
         public bool MessageHeaderInputValidation(string inputText)
         {
@@ -292,34 +302,24 @@ namespace SE_Coursework.Classes
             }
 
             return false;
-
         }
 
-
-        private void SetPublicVariable()
-        {
-            Header = header;
-            Sender = sender;
-            Subject = subject;
-            Text = text;
-        }
-    
         public void EndOfCycle()
         {
             header = string.Empty;
             sender = string.Empty;
             text = string.Empty;
             subject = string.Empty;
-            name = string.Empty;       
+            name = string.Empty;
 
             Header = string.Empty;
             Sender = string.Empty;
             Subject = string.Empty;
             Text = string.Empty;
         }
-    
-    
-        
+
+
+
 
 
         // Adds message to the list
@@ -333,28 +333,12 @@ namespace SE_Coursework.Classes
                 MessageText = inputText
             };
 
-
             listOfMessages.Add(message);
-            messageToReturn = message;
-
-            //if (header[0].ToString().Equals("T"))
-            //{
-            //    MessageBox.Show("Tweet Saved.");
-            //}
-            //if (header[0].ToString().Equals("S"))
-            //{
-            //    MessageBox.Show("SMS Saved.");
-            //}
-            //if (header[0].ToString().Equals("E"))
-            //{
-            //    MessageBox.Show("Email Saved.");
-            //}
-
-
+            //messageToReturn = message;
             header = sender = subject = text = string.Empty;
         }
-        
-        
+
+
 
 
         public void RetrieveStoredList()
@@ -376,13 +360,32 @@ namespace SE_Coursework.Classes
                 }
             }
 
-        }    
+        }
 
 
-        #region User's Choice Validation Methods
+        #endregion
 
-        // Method which displays a messagebox asking the user if they are sure they want to exit the application
-        // And gives them the option of answering 'yes' or 'no'
+        #region Private Method
+
+        /// <summary>
+        /// This method sets the public variables from the private equivalent
+        /// </summary>
+        private void SetPublicVariable()
+        {
+            Header = header;
+            Sender = sender;
+            Subject = subject;
+            Text = text;
+        }
+
+        #endregion
+
+        #region User's Choice Validation Methods      
+
+        /// <summary>
+        /// Method which displays a messagebox asking the user if they are sure they want to exit the application
+        /// And gives them the option of answering 'yes' or 'no'        
+        /// </summary>
         public void ExitApplicationValidation()
         {
             MessageBoxResult yesOrNo = MessageBox.Show("Are you sure you want to exit the application?", "Exit Application", MessageBoxButton.YesNo);
@@ -395,7 +398,6 @@ namespace SE_Coursework.Classes
 
                 Application.Current.Shutdown();
             }
-
             else
             {
                 return;

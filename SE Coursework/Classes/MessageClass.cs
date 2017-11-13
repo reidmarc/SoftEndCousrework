@@ -1,21 +1,25 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// Class MessageClass //////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// Code Written By: ******************** ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Description: Class which allows the application to create message objects.
 
 namespace SE_Coursework.Classes
-{
-    
+{    
     public class MessageClass
-    {        
+    {
+        #region Public Properties
+
         public string Header { get; set; }
         
         public string Sender { get; set; }
 
         public string Subject { get; set; }
 
-        public string MessageText { get; set; }  
+        public string MessageText { get; set; }
+
+        #endregion
     }
 }

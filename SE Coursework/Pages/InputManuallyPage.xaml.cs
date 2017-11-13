@@ -67,9 +67,8 @@ namespace SE_Coursework.Pages
                 messageBodyTxt.Focus();
                 return;
             }
-
-            saveButton.IsEnabled = true;
-
+            
+            saveButton.IsEnabled = true;   
 
             string text = validation.Text;
             string header = validation.Header;

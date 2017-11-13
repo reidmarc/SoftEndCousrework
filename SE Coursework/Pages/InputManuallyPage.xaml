@@ -16,13 +16,13 @@
 
 
         <!--Navigation - button (Setup - Arial Font, Size 12, Cannot be tab selected)-->
-        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1020,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False"/>
-        <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1020,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="backButton_Click"/>
+        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1045,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="backButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
 
 
         <!-- Message Header-->
         <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="34,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="#3498db" BorderThickness="3"/>
+        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="#3498db" BorderThickness="3"/>
 
 
         <!-- Message Body-->
@@ -34,10 +34,10 @@
 
 
         <!-- Save Button-->
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="632,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click" IsEnabled="False"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="632,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click" IsEnabled="False" BorderBrush="#3498db" BorderThickness="3"/>
 
         <!--The vertical divider-->
-        <Separator HorizontalAlignment="Left" Height="28" Margin="280,445,0,0" VerticalAlignment="Top" Width="640" RenderTransformOrigin="0.5,0.5" Foreground="Black" BorderBrush="Black" BorderThickness="3">
+        <Separator HorizontalAlignment="Left" Height="28" Margin="282,445,0,0" VerticalAlignment="Top" Width="640" RenderTransformOrigin="0.5,0.5" Foreground="Black" BorderBrush="Black" BorderThickness="3">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -51,27 +51,36 @@
 
         <!-- Output Side-->
         <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="632,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="convertedMessageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="632,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True"/>
+        <TextBox x:Name="convertedMessageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="632,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
         <Label Content="Message Sender:" HorizontalAlignment="Left" Height="30" Margin="796,205,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="convertedMessageSenderTxt" HorizontalAlignment="Left" Height="30" Margin="796,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True"/>
+        <TextBox x:Name="convertedMessageSenderTxt" HorizontalAlignment="Left" Height="30" Margin="796,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
 
 
         <Label Content="Message Subject:" HorizontalAlignment="Left" Height="30" Margin="990,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="convertedMessageSubjectTxt" HorizontalAlignment="Left" Height="30" Margin="990,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True"/>
+        <TextBox x:Name="convertedMessageSubjectTxt" HorizontalAlignment="Left" Height="30" Margin="990,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="175" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
         <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="632,282,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-        <TextBox x:Name="convertedMessageBodyTxt" HorizontalAlignment="Left" Margin="632,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3" IsReadOnly="True"/>
+        <TextBox x:Name="convertedMessageBodyTxt" HorizontalAlignment="Left" Margin="632,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="533" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
 
 
         <!-- Convert Button-->
         <Button x:Name="convertButton" Content="Convert" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="convertButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
-        
+
         <!-- Import File Button-->
         <Button x:Name="importFile" Content="Import File" HorizontalAlignment="Left" Margin="34,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3" Click="importFile_Click"/>
 
+
+
+
+        <!-- Main Labels-->
+        <Label Content="Input" HorizontalAlignment="Left" Height="49" Margin="34,131,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="24" FontWeight="ExtraBlack" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="538"/>
+        <Separator HorizontalAlignment="Left" Height="30" Margin="257,158,0,0" VerticalAlignment="Top" Width="94"/>
+
+        <Label Content="Preview" HorizontalAlignment="Left" Height="49" Margin="632,131,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="24" FontWeight="ExtraBlack" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="533"/>
+        <Separator HorizontalAlignment="Left" Height="30" Margin="838,158,0,0" VerticalAlignment="Top" Width="128"/>
 
 
 
