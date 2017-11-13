@@ -13,9 +13,11 @@ namespace SE_Coursework.Classes
     public class ProcessingClass
     {
         Dictionary<string, string> textWordsDictionary = new Dictionary<string, string>();
-        Dictionary<string, string> sirDictionary = new Dictionary<string, string>();
+        
         Dictionary<string, int> mentionsDictionary = new Dictionary<string, int>();
-        Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();        
+        Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();
+
+        List<string> sirList = new List<string>();
         List<string> listQuarantine = new List<string>();
 
         
@@ -101,6 +103,7 @@ namespace SE_Coursework.Classes
             {
                 MessageBox.Show("Found SIR");
                 GetSportCentreCodeAndNatureOfIncident(proText);
+                AddSIRListToFile();
             } 
 
             MessageBox.Show("Processing EMAIL");
@@ -241,18 +244,21 @@ namespace SE_Coursework.Classes
 
         private void GetSportCentreCodeAndNatureOfIncident(string proText)
         {
-            string[] splitProText = proText.Split(' ');
+            string[] splitProText = proText.Trim().Split(' ');
             string[] natureOfIncident = {"Theft of Properties", "Staff Attack", "Device Damage", "Raid", "Customer Attack", "Staff Abuse", "Bomb Threat", "Terrorism", "Suspicious Incident", "Sport Injury", "Personal Info Leak" };
             string incident = string.Empty;
             string code = string.Empty;
 
 
-            if (!splitProText[3].Trim().Count().Equals(9))
+            if (!splitProText[3].ToString().Trim().Count().Equals(9))
             {
+                
                 MessageBox.Show("The Sport centre code you have entered is incorrect.");
+                MessageBox.Show(splitProText[3].ToString());
             }
             else
             {
+                MessageBox.Show(splitProText[3].ToString());
                 code = splitProText[3];
             }
 
@@ -264,32 +270,53 @@ namespace SE_Coursework.Classes
                     incident = s;
                 }
             }
-           
-            sirDictionary.Add(code, incident);       
+
+            string inputString = ($"[{code}] - [{incident}]");
+
+            if (!sirList.Contains(inputString))
+            {
+                sirList.Add(inputString);
+            }
+            else
+            {
+                MessageBox.Show("The Sport Centre Code and Nature of Incident already exist on the SIR list.");
+            }
         }
 
-        private void AddHashTagToDictionaryToFile()
+        private void AddHashTagDictionaryToFile()
         {        
             using (var writer = new StreamWriter(@".\hashtags.csv"))
             {
                 foreach (var pair in hashtagDictionary)
                 {
-                    writer.WriteLine("{0},{1}", pair.Key, pair.Value);
+                    writer.WriteLine($"{pair.Key},{pair.Value}");
                 }  
             }            
         }
 
 
 
-        private void AddMentionsToDictionaryToFile()
+        private void AddMentionsDictionaryToFile()
         {  
             using (var writer = new StreamWriter(@".\mentions.csv"))
             {
                 foreach (var pair in mentionsDictionary)
                 {
-                    writer.WriteLine("{0},{1}", pair.Key, pair.Value);
+                    writer.WriteLine($"{pair.Key},{pair.Value}");
                 }
             }           
+        }
+
+
+        private void AddSIRListToFile()
+        {
+            using (var writer = new StreamWriter(@".\sir.csv"))
+            {
+                foreach (var entry in sirList)
+                {
+                    writer.WriteLine($"{entry}");
+                }
+            }
         }
 
 
@@ -352,8 +379,8 @@ namespace SE_Coursework.Classes
         {            
             FindMentions(proText);
             FindHashTags(proText);
-            AddHashTagToDictionaryToFile();
-            AddMentionsToDictionaryToFile();            
+            AddHashTagDictionaryToFile();
+            AddMentionsDictionaryToFile();            
         }
 
         #endregion  

@@ -29,13 +29,14 @@ namespace SE_Coursework.Pages
         JsonClass jsonClass = new JsonClass();
         ProcessingClass menuProcessing = new ProcessingClass();
 
-        Dictionary<string, string> sirDictionary = new Dictionary<string, string>();
+        
         Dictionary<string, int> mentionsDictionary = new Dictionary<string, int>();
         Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();
 
 
         List<string> hashTagList = new List<string>();
         List<string> mentionsList = new List<string>();
+        List<string> sirList = new List<string>();
 
         #endregion
 
@@ -46,6 +47,7 @@ namespace SE_Coursework.Pages
             InitializeComponent();
             RetrieveHashTags();
             RetrieveMentions();
+            RetrieveSIR();
 
         }
 
@@ -237,7 +239,64 @@ namespace SE_Coursework.Pages
 
         #region SIR ListBox
 
-        // Logic here
+
+        private void RetrieveSIR()
+        {
+            using (var reader = new StreamReader(@".\sir.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line[3].ToString().Equals("-") && line[7].ToString().Equals("-"))
+                    {
+                        //string lineString = line.ToString();
+
+                        //int firstSpaceIndex = lineString.Trim().IndexOf(",");
+                        //string keyString = lineString.Substring(0, firstSpaceIndex);
+                        //string valueString = lineString.Substring(firstSpaceIndex + 1);                        
+
+                        //sirDictionary.Add(keyString.Trim(), valueString);
+
+                        sirList.Add(line.ToString());
+                    }
+                }
+            }
+
+            UpdateSIRListBox();
+        }
+
+
+        private void UpdateSIRListBox()
+        {  
+            int sirCounter = sirList.Count;
+            
+            foreach (string entry in sirList)
+            {
+                if (sirCounter > 0)
+                {
+
+                    sirListBox.Items.Add(sirList[(sirCounter - 1)]);
+
+
+                    sirCounter = sirCounter - 1;
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #endregion
 

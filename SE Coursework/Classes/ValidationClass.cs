@@ -98,15 +98,9 @@ namespace SE_Coursework.Classes
         }
 
         public bool MessageBodyInputValidation(string inputText)
-        {
-            
-
-            //string emailPattern = @"[A-Za-z0-9_\-\+]+@[A-Za-z0-9\-]+\.([A-Za-z]{2,3})(?:\.[a-z]{2})?";
-
-
+        {   
             EmailAddressAttribute emailAddressCheck = new EmailAddressAttribute();
             PhoneAttribute phoneNumberCheck = new PhoneAttribute();
-
 
             // SMS
             if (smsMessage.Equals(true))
@@ -395,7 +389,8 @@ namespace SE_Coursework.Classes
             {
                 File.WriteAllText(@".\hashtags.csv", String.Empty);
                 File.WriteAllText(@".\mentions.csv", String.Empty);
-                
+                File.WriteAllText(@".\sir.csv", String.Empty);
+
                 Application.Current.Shutdown();
             }
 

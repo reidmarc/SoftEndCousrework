@@ -29,6 +29,9 @@ namespace SE_Coursework.Pages
 
         private string processedText = string.Empty;
 
+
+
+        // Constructor
         public InputManuallyPage()
         {
             InitializeComponent();

@@ -37,17 +37,17 @@
         <!-- Trending List-->
         <Label Content="Trending" HorizontalAlignment="Left" Margin="452,137,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
         <Separator HorizontalAlignment="Left" Height="30" Margin="452,151,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox x:Name="trendingListBox" HorizontalAlignment="Left" Height="105" Margin="452,186,0,0" VerticalAlignment="Top" Width="417"/>
+        <ListBox x:Name="trendingListBox" HorizontalAlignment="Left" Height="181" Margin="452,186,0,0" VerticalAlignment="Top" Width="269"/>
 
         <!-- Mentions List-->
-        <Label Content="Mentions" HorizontalAlignment="Left" Margin="452,337,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
-        <Separator HorizontalAlignment="Left" Height="30" Margin="452,351,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox x:Name="mentionsListBox" HorizontalAlignment="Left" Height="105" Margin="452,386,0,0" VerticalAlignment="Top" Width="417"/>
+        <Label Content="Mentions" HorizontalAlignment="Left" Margin="452,409,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
+        <Separator HorizontalAlignment="Left" Height="30" Margin="452,423,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="mentionsListBox" HorizontalAlignment="Left" Height="181" Margin="452,454,0,0" VerticalAlignment="Top" Width="269"/>
 
         <!-- SIR List-->
-        <Label Content="SIR" HorizontalAlignment="Left" Margin="452,530,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
-        <Separator HorizontalAlignment="Left" Height="30" Margin="452,544,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox x:Name="sirListBox" HorizontalAlignment="Left" Height="105" Margin="452,579,0,0" VerticalAlignment="Top" Width="417"/>
+        <Label Content="SIR" HorizontalAlignment="Left" Margin="769,138,0,0" VerticalAlignment="Top" Width="100" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
+        <Separator HorizontalAlignment="Left" Height="30" Margin="769,152,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="sirListBox" HorizontalAlignment="Left" Height="449" Margin="769,186,0,0" VerticalAlignment="Top" Width="269"/>
 
     </Grid>
 </Page>

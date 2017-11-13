@@ -22,12 +22,12 @@
 
         <!-- Message Header-->
         <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="34,204,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
-        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="34,240,0,0" TextWrapping="Wrap" Text="T123456789" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="#3498db" BorderThickness="3"/>
 
 
         <!-- Message Body-->
         <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="34,282,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3"/>
+        <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="34,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3" BorderBrush="#3498db" BorderThickness="3"/>
 
 
 
@@ -37,7 +37,7 @@
         <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="632,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="saveButton_Click" IsEnabled="False"/>
 
         <!--The vertical divider-->
-        <Separator HorizontalAlignment="Left" Height="28" Margin="280,445,0,0" VerticalAlignment="Top" Width="640" RenderTransformOrigin="0.5,0.5" Foreground="Black">
+        <Separator HorizontalAlignment="Left" Height="28" Margin="280,445,0,0" VerticalAlignment="Top" Width="640" RenderTransformOrigin="0.5,0.5" Foreground="Black" BorderBrush="Black" BorderThickness="3">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -67,7 +67,7 @@
 
 
         <!-- Convert Button-->
-        <Button x:Name="convertButton" Content="Convert" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="convertButton_Click" />
+        <Button x:Name="convertButton" Content="Convert" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="convertButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
         
 
 
