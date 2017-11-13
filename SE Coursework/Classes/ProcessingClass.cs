@@ -66,7 +66,7 @@ namespace SE_Coursework.Classes
 
         public void MessageProcessing(string header, ref string text, string subject)
         {
-            headerCheck = header[0].ToString();            
+            headerCheck = header[0].ToString().ToUpper();            
 
             if (headerCheck.Equals("S"))
             { 
@@ -101,12 +101,12 @@ namespace SE_Coursework.Classes
 
             if (subject.Trim().StartsWith("SIR"))
             {
-                MessageBox.Show("Found SIR");
-                GetSportCentreCodeAndNatureOfIncident(proText);
-                AddSIRListToFile();
+                FormatSIR(ref proText);
+
+               //MessageBox.Show("Found SIR");               
             } 
 
-            MessageBox.Show("Processing EMAIL");
+            //MessageBox.Show("Processing EMAIL");
         }
 
         private void ProccessedTweet(ref string proText)
@@ -116,7 +116,56 @@ namespace SE_Coursework.Classes
             MessageBox.Show("Processing TWEET");
         }
 
+        private void FormatSIR(ref string proText)
+        {
+            string[] splitProText = proText.Trim().Split(' ');
 
+            
+            if (splitProText[4].Equals("Nature"))
+            {
+                splitProText[4] = $"\n{splitProText[4]}";                   
+            }
+
+            // Formats for Nature of Incident with 1 words
+            if (splitProText[7].Equals("Raid") || splitProText[7].Equals("Terrorism"))
+            {
+                if (splitProText.Length > 8)
+                {
+                    splitProText[8] = $"\n{splitProText[8]}";
+                }
+            }
+
+            // Formats for Nature of Incident with 2 words
+            if (splitProText[7].Equals("Staff") || splitProText[7].Equals("Device")     || splitProText[7].Equals("Customer") || splitProText[7].Equals("Customer") ||
+                splitProText[7].Equals("Bomb")  || splitProText[7].Equals("Suspicious") || splitProText[7].Equals("Sport"))
+            {
+                if (splitProText.Length > 9)
+                {
+                    splitProText[9] = $"\n{splitProText[9]}";
+                }
+            }
+
+            // Formats for Nature of Incident with 3 words
+            if (splitProText[7].Equals("Personal") || splitProText[7].Equals("Theft"))
+            {
+                if (splitProText.Length > 10)
+                {
+                    splitProText[10] = $"\n{splitProText[10]}";
+                }
+            }
+
+
+            // Concatenate all the elements into a StringBuilder.
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in splitProText)
+            {
+                builder.Append(value);
+                builder.Append(' ');
+            }
+
+            proText = builder.ToString();
+
+        }
 
         private void TextSpeakAbbreviations(ref string proText)
         {   
@@ -263,13 +312,32 @@ namespace SE_Coursework.Classes
             }
 
 
-            foreach (string s in natureOfIncident)
+            if (splitProText[8].Equals("Staff"))
             {
-                if (s.StartsWith(splitProText[7]))
+                if (splitProText[9].Equals("Attack"))
                 {
-                    incident = s;
+                    incident = "Staff Attack";                    
+                }
+                else
+                {
+                    incident = "Staff Abuse";                    
                 }
             }
+            else
+            {
+                foreach (string s in natureOfIncident)
+                {
+                    if (s.StartsWith(splitProText[7]))
+                    {
+                        incident = s;
+                        break;
+                    }
+                }
+            }
+
+
+
+
 
             string inputString = ($"[{code}] - [{incident}]");
 
@@ -373,6 +441,30 @@ namespace SE_Coursework.Classes
                 }
 
             }
+        }
+
+        public void GetSIR()
+        {
+            using (var reader = new StreamReader(@".\sir.csv"))
+            {
+
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+
+                    if (line[3].ToString().Equals("-") && line[7].ToString().Equals("-"))
+                    {
+                        sirList.Add(line.ToString());
+                    }     
+                }
+
+            }
+        }
+
+        public void SearchForSIR(string proText)
+        {
+            GetSportCentreCodeAndNatureOfIncident(proText);
+            AddSIRListToFile();
         }
 
         public void SearchForHashTagsAndMentions(string proText)

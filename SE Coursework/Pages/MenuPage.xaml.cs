@@ -48,7 +48,6 @@ namespace SE_Coursework.Pages
             RetrieveHashTags();
             RetrieveMentions();
             RetrieveSIR();
-
         }
 
         #endregion
@@ -249,15 +248,7 @@ namespace SE_Coursework.Pages
                     var line = reader.ReadLine();
 
                     if (line[3].ToString().Equals("-") && line[7].ToString().Equals("-"))
-                    {
-                        //string lineString = line.ToString();
-
-                        //int firstSpaceIndex = lineString.Trim().IndexOf(",");
-                        //string keyString = lineString.Substring(0, firstSpaceIndex);
-                        //string valueString = lineString.Substring(firstSpaceIndex + 1);                        
-
-                        //sirDictionary.Add(keyString.Trim(), valueString);
-
+                    {   
                         sirList.Add(line.ToString());
                     }
                 }
@@ -283,20 +274,6 @@ namespace SE_Coursework.Pages
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         #endregion
 

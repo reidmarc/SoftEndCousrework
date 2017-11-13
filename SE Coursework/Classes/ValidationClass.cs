@@ -153,7 +153,7 @@ namespace SE_Coursework.Classes
                 }
 
                 SetPublicVariable();
-                MessageBox.Show("SMS Converted");                
+                //MessageBox.Show("SMS Converted");                
                 return true;
             }
 
@@ -223,16 +223,18 @@ namespace SE_Coursework.Classes
 
 
 
-
-
-
-
-
-
-                // Creates substrings from newInputText
-                subject = subjectAndText.Trim().Substring(0, 20);
-                text = subjectAndText.Trim().Substring(20);
-
+                if (subjectAndText.ToUpper().StartsWith("SIR"))
+                {
+                    // Creates substrings from newInputText
+                    subject = subjectAndText.Trim().Substring(0, 12);
+                    text = subjectAndText.Trim().Substring(12);
+                }
+                else
+                {
+                    // Creates substrings from newInputText
+                    subject = subjectAndText.Trim().Substring(0, 20);
+                    text = subjectAndText.Trim().Substring(20);
+                }
 
 
                 // Checks the email doesn't exceed the maximum length
@@ -243,7 +245,7 @@ namespace SE_Coursework.Classes
                 }
 
                 SetPublicVariable();
-                MessageBox.Show("Email Converted");                
+                //MessageBox.Show("Email Converted");                
                 return true;
             }
 
@@ -284,7 +286,7 @@ namespace SE_Coursework.Classes
                 }
 
                 SetPublicVariable();
-                MessageBox.Show("Tweet Converted");                
+                //MessageBox.Show("Tweet Converted");                
                 return true;
 
             }
@@ -335,18 +337,18 @@ namespace SE_Coursework.Classes
             listOfMessages.Add(message);
             messageToReturn = message;
 
-            if (header[0].ToString().Equals("T"))
-            {
-                MessageBox.Show("Tweet Saved.");
-            }
-            if (header[0].ToString().Equals("S"))
-            {
-                MessageBox.Show("SMS Saved.");
-            }
-            if (header[0].ToString().Equals("E"))
-            {
-                MessageBox.Show("Email Saved.");
-            }
+            //if (header[0].ToString().Equals("T"))
+            //{
+            //    MessageBox.Show("Tweet Saved.");
+            //}
+            //if (header[0].ToString().Equals("S"))
+            //{
+            //    MessageBox.Show("SMS Saved.");
+            //}
+            //if (header[0].ToString().Equals("E"))
+            //{
+            //    MessageBox.Show("Email Saved.");
+            //}
 
 
             header = sender = subject = text = string.Empty;
