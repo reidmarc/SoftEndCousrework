@@ -30,12 +30,12 @@
 
 
         <!--Navigation - button (Setup - Arial Font, Size 12, Cannot be tab selected)-->
-        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
-        <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1045,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="backButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="ExitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1045,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="BackButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
 
 
-        <Button x:Name="nextButton" Content="&gt; &gt; Next Message &gt; &gt;" HorizontalAlignment="Left" Margin="719,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="nextButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
-        <Button x:Name="previousButton" Content="&lt; &lt; Previous Message &lt; &lt;" HorizontalAlignment="Left" Margin="331,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="previousButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="nextButton" Content="&gt; &gt; Next Message &gt; &gt;" HorizontalAlignment="Left" Margin="719,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="NextButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="previousButton" Content="&lt; &lt; Previous Message &lt; &lt;" HorizontalAlignment="Left" Margin="331,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="PreviousButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
 
 
     </Grid>

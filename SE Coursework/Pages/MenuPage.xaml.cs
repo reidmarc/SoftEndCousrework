@@ -181,7 +181,7 @@ namespace SE_Coursework.Pages
         #region Mentions ListBox
 
        private void RetrieveMentions()
-        {
+       {
             using (var reader = new StreamReader(@".\mentions.csv"))
             {
                 while (!reader.EndOfStream)
@@ -205,7 +205,7 @@ namespace SE_Coursework.Pages
             }
 
             UpdateMentionsListBox();
-        }
+       }
 
 
         private void UpdateMentionsListBox()
@@ -281,21 +281,16 @@ namespace SE_Coursework.Pages
 
         #region Click Events
 
-        private void manuallyInputButton_Click(object sender, RoutedEventArgs e)
+        private void ManuallyInputButton_Click(object sender, RoutedEventArgs e)
         {
             // Instantiate an object of the InputManually page
-            InputManuallyPage inputManPage = new InputManuallyPage();
+            InputMessagesPage inputManPage = new InputMessagesPage();
 
             // Navigates to the InputManually page
             NavigationService.Navigate(inputManPage);
-        }
+        }        
 
-        private void autoInputButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Feature not yet implmented.");
-        }
-
-        private void viewMessagesButton_Click(object sender, RoutedEventArgs e)
+        private void ViewMessagesButton_Click(object sender, RoutedEventArgs e)
         {
             // Instantiate an object of the ViewMessages Page           
             ViewMessagesPage viewMessages = new ViewMessagesPage();
@@ -305,7 +300,7 @@ namespace SE_Coursework.Pages
 
         }
 
-        private void exportJsonButton_Click(object sender, RoutedEventArgs e)
+        private void ExportJsonButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -332,7 +327,7 @@ namespace SE_Coursework.Pages
         #region Exit Button
 
         // Method which handles the 'Exit Application' button being clicked
-        private void exitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Calls the method ExitApplicationValidation() from the Validation class.
             menuValidation.ExitApplicationValidation();

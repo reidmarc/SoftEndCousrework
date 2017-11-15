@@ -74,7 +74,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\InputManuallyPage.xaml">
+    <Page Include="Pages\InputMessagesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,8 +88,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\InputManuallyPage.xaml.cs">
-      <DependentUpon>InputManuallyPage.xaml</DependentUpon>
+    <Compile Include="Pages\InputMessagesPage.xaml.cs">
+      <DependentUpon>InputMessagesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>

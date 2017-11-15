@@ -39,12 +39,12 @@ namespace SE_Coursework.Pages
 
         #region Click Events
 
-        private void nextButton_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             DisplayNextMessage();            
         }
 
-        private void previousButton_Click(object sender, RoutedEventArgs e)
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
             DisplayPreviousMessage();
         }
@@ -54,7 +54,7 @@ namespace SE_Coursework.Pages
 
         #region Navigation Buttons
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Instantiate an object of the InputManually page
             MenuPage menuPage = new MenuPage();
@@ -64,7 +64,7 @@ namespace SE_Coursework.Pages
         }
 
         // Method which handles the 'Exit Application' button being clicked
-        private void exitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
 
 

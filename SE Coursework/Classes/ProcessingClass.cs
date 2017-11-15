@@ -22,16 +22,14 @@ namespace SE_Coursework.Classes
 {
     public class ProcessingClass
     {
-        #region Data Structures / Variables
+        #region Data Structures
 
         Dictionary<string, string> textWordsDictionary = new Dictionary<string, string>();        
         Dictionary<string, int> mentionsDictionary = new Dictionary<string, int>();
         Dictionary<string, int> hashtagDictionary = new Dictionary<string, int>();
 
         List<string> sirList = new List<string>();
-        List<string> listQuarantine = new List<string>(); 
-
-        string headerCheck = string.Empty;
+        List<string> listQuarantine = new List<string>();         
 
         #endregion
 
@@ -57,6 +55,8 @@ namespace SE_Coursework.Classes
         /// <param name="subject">Passed in to go on to ProcessedEmail</param>
         public void MessageProcessing(string header, ref string text, string subject)
         {
+            string headerCheck = string.Empty;
+
             // Takes the first char of the string header, converts the char to a string then converts it to uppercase
             headerCheck = header[0].ToString().ToUpper();
 

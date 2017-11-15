@@ -14,7 +14,7 @@
 
 
         <!--Navigation - button (Setup - Arial Font, Size 12, Cannot be tab selected)-->
-        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="exitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="ExitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
 
         <!-- Menu Label-->
         <Label Content="Menu" HorizontalAlignment="Left" Margin="151,160,0,0" VerticalAlignment="Top" Width="180" Height="30" Foreground="Black" FontFamily="Arial" FontSize="16" VerticalContentAlignment="Center" FontWeight="ExtraBold" IsTabStop="False"/>
@@ -23,9 +23,9 @@
         <Separator HorizontalAlignment="Left" Height="30" Margin="151,174,0,0" VerticalAlignment="Top" Width="65"/>
 
 
-        <Button x:Name="manuallyInputButton" Content="Input Messages" HorizontalAlignment="Left" Margin="151,202,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="manuallyInputButton_Click" HorizontalContentAlignment="Left" BorderBrush="#3498db" BorderThickness="3"/>
-        <Button x:Name="viewMessagesButton" Content="View Stored Messages" HorizontalAlignment="Left" Margin="151,252,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12"  HorizontalContentAlignment="Left" Click="viewMessagesButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
-        <Button x:Name="exportJsonButton" Content="Export JSON file" HorizontalAlignment="Left" Margin="151,302,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12"  HorizontalContentAlignment="Left" Click="exportJsonButton_Click" BorderBrush="#3498db" BorderThickness="3" ToolTip="The file saves to your desktop."/>
+        <Button x:Name="manuallyInputButton" Content="Input Messages" HorizontalAlignment="Left" Margin="151,202,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="ManuallyInputButton_Click" HorizontalContentAlignment="Left" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="viewMessagesButton" Content="View Stored Messages" HorizontalAlignment="Left" Margin="151,252,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12"  HorizontalContentAlignment="Left" Click="ViewMessagesButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="exportJsonButton" Content="Export JSON file" HorizontalAlignment="Left" Margin="151,302,0,0" VerticalAlignment="Top" Width="146"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12"  HorizontalContentAlignment="Left" Click="ExportJsonButton_Click" BorderBrush="#3498db" BorderThickness="3" ToolTip="The file saves to your desktop."/>
 
 
 
