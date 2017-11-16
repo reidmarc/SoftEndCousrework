@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////// Window MainWindow /////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Code Written By: 03001588 //////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#region Usings
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+#endregion
 
 namespace SE_Coursework
 {
@@ -24,23 +21,19 @@ namespace SE_Coursework
         {
             InitializeComponent();
 
+            // Sets the content of the window to the menu page on launch
             MainFrame.Content = new SE_Coursework.Pages.MenuPage();
 
+            // Sets the size of the window to the si
             SetWindowSize();
         }
 
+        /// <summary>
+        /// This method sets the size of the window to dynamically adjust depending on the size of the page being viewed
+        /// </summary>
         private void SetWindowSize()
-        {
-            // Manually alter window height and width
-            this.SizeToContent = SizeToContent.Manual;
-
-            // Automatically resize width relative to content
-            this.SizeToContent = SizeToContent.Width;
-
-            // Automatically resize height relative to content
-            this.SizeToContent = SizeToContent.Height;
-
-            // Automatically resize height and width relative to content
+        {   
+            // This automatically resizes the height and the width relative to content displayed (i.e. pages)
             this.SizeToContent = SizeToContent.WidthAndHeight;
         }
     }

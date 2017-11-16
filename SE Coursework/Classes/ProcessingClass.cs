@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// Class ProcessingClass /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////// Code Written By: ******************** ////////////////////////////////
+///////////////////////////////////// Code Written By: 03001588 //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Description: Class used to process the main block of text provided, depending on the message type.
@@ -37,8 +37,7 @@ namespace SE_Coursework.Classes
 
         // Default Constructor
         public ProcessingClass()
-        {
-            
+        {            
 
         }
 
@@ -345,6 +344,7 @@ namespace SE_Coursework.Classes
             if (!splitProText[3].ToString().Trim().Count().Equals(9))
             {
                 MessageBox.Show("The Sport centre code you have entered is incorrect.");
+                return;
             }
             else
             {
@@ -387,6 +387,7 @@ namespace SE_Coursework.Classes
             else
             {
                 MessageBox.Show("The Sport Centre Code and Nature of Incident already exist on the SIR list.");
+                return;
             }
         }
 
@@ -395,20 +396,21 @@ namespace SE_Coursework.Classes
         #region Tweet Related
 
         /// <summary>
-        /// 
+        /// This methoid calls the method FindAndReplaceTextSpeakAbbreviations passing on the string proText.
         /// </summary>
         /// <param name="proText"></param>
         private void ProcessedTweet(ref string proText)
         {
-            FindAndReplaceTextSpeakAbbreviations(ref proText);   
-
-            MessageBox.Show("Processing TWEET");
+            FindAndReplaceTextSpeakAbbreviations(ref proText);
         }
 
         /// <summary>
-        /// 
+        /// This method splits the string proText and stores it in a string array then searches through  
+        /// the array looking for any '#' hashtags, when it finds one it checks if that entry already exists
+        /// if it does, then the value for that hashtag is increased by 1. If it doesn't already exist
+        /// the method adds the hashtag as a key with a value of 1 to the hashtagDictionary
         /// </summary>
-        /// <param name="proText"></param>
+        /// <param name="proText">Passed in, to be searched through for a '#' hashtags</param>       
         private void FindHashTags(string proText)
         {
             string[] splitProText = proText.Split(' ');
@@ -420,11 +422,9 @@ namespace SE_Coursework.Classes
 
                 if (splitProText[i].StartsWith("#"))
                 {
-
                     for (int q = 0; q < hashtagDictionary.Count; q++)
                     {
                         var hashtagElement = hashtagDictionary.ElementAt(q);
-
 
                         if (hashtagElement.Key.Equals(splitProText[i]))
                         {
@@ -432,7 +432,6 @@ namespace SE_Coursework.Classes
                             MessageBox.Show("Updated a hashtag entry");
                             hashtagExists = true;
                         }
-
                     }
 
                     if (hashtagExists.Equals(false))
@@ -444,11 +443,13 @@ namespace SE_Coursework.Classes
             }
         }
 
-
         /// <summary>
-        /// 
+        /// This method splits the string proText and stores it in a string array then searches through  
+        /// the array looking for any '@' mentions, when it finds one it checks if that entry already exists
+        /// if it does, then the value for that mention is increased by 1. If it doesn't already exist
+        /// the method adds the mention as a key with a value of 1 to the mentionsDictionary
         /// </summary>
-        /// <param name="proText"></param>
+        /// <param name="proText">Passed in, to be searched through for a '@' mentions</param>       
         private void FindMentions(string proText)
         {
             string[] splitProText = proText.Split(' ');
@@ -465,7 +466,6 @@ namespace SE_Coursework.Classes
                     for (int w = 0; w < mentionsDictionary.Count; w++)
                     {
                         var mentionElement = mentionsDictionary.ElementAt(w);
-
 
                         if (mentionElement.Key.Equals(splitProText[i]))
                         {

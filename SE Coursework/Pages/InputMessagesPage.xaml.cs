@@ -1,44 +1,47 @@
-﻿using SE_Coursework.Classes;
-using System;
+﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////// Page InputMessagePage ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Code Written By: 03001588 //////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#region Usings
+
+using SE_Coursework.Classes;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+#endregion
 
 namespace SE_Coursework.Pages
 {
     /// <summary>
     /// Interaction logic for InputManuallyPage.xaml
     /// </summary>
-    public partial class InputManuallyPage : Page
+    public partial class InputMessagesPage : Page
     {
+        #region Objects / Data Structure / Variables
+
         ValidationClass validation = new ValidationClass();
         JsonClass json = new JsonClass();
         ProcessingClass processing = new ProcessingClass();
 
         List<string> importList = new List<string>();
 
-        bool IsTheDataImported = false;
-
-        int importCounter = 0;
-
+        bool IsTheDataImported = false;     
 
         private string processedText = string.Empty;
 
+        int importCounter = 0;
 
+        #endregion
+
+        #region Constructor
 
         // Constructor
-        public InputManuallyPage()
+        public InputMessagesPage()
         {
             InitializeComponent();
             validation.RetrieveStoredList();
@@ -48,9 +51,14 @@ namespace SE_Coursework.Pages
             processing.GetSIR();
         }
 
+        #endregion
 
-        
-        private void convertButton_Click(object sender, RoutedEventArgs e)
+        #region Click Events
+
+        /// <summary>
+        /// This click event method deals with how the message is formatted then previewed before being saved
+        /// </summary>        
+        private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {           
             // Validates the message header
             if (validation.MessageHeaderInputValidation(messageHeaderTxt.Text.Trim()).Equals(false))
@@ -68,6 +76,7 @@ namespace SE_Coursework.Pages
                 return;
             }
             
+            // Enables the 'save button'
             saveButton.IsEnabled = true;   
 
             string text = validation.Text;
@@ -77,7 +86,8 @@ namespace SE_Coursework.Pages
 
             processing.MessageProcessing(header, ref text, subject);
 
-
+            // Splits the text up into different textboxes for the user to preview the information
+            // Before saving
             convertedMessageHeaderTxt.Text = validation.Header;
             convertedMessageSenderTxt.Text = validation.Sender;
             convertedMessageSubjectTxt.Text = validation.Subject;
@@ -85,34 +95,38 @@ namespace SE_Coursework.Pages
             processedText = text.Trim();  
         }
 
-
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {            
+        /// <summary>
+        /// This click event method deals with how the message is saved
+        /// </summary>       
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {           
+            // Sets the path as a string
             string path = @".\EustonLeisureMessages.json";
 
+            // If the message is a Tweet, then the method SearchForHashTagsAndMentions() is called
             if (validation.Header.StartsWith("T"))
             {
                 processing.SearchForHashTagsAndMentions(processedText);
             }
 
+            // If the message is an Email, then the method SearchForSIR() is called
             if (validation.Header.StartsWith("E"))
             {
                 processing.SearchForSIR(processedText);
             }
 
-
-
-
+            // Adds the message to a list
             validation.AddMessageToList(processedText);
-
 
             // Converts the whole list of messages into JSON and stores it
             json.Serialize(validation.listOfMessages, path);
 
+            // Sets the save button to IsEnabled = false
             saveButton.IsEnabled = false;
 
             validation.EndOfCycle();
 
+            // Clears the textboxes
             convertedMessageHeaderTxt.Text = string.Empty;
             convertedMessageSenderTxt.Text = string.Empty;
             convertedMessageSubjectTxt.Text = string.Empty;
@@ -122,8 +136,11 @@ namespace SE_Coursework.Pages
         }
 
 
-
-        private void importFile_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// This click event method deals with the application importing infomation from a textfile
+        /// When the user clicks the button
+        /// </summary>       
+        private void ImportFile_Click(object sender, RoutedEventArgs e)
         {
             if (IsTheDataImported.Equals(false))
             {
@@ -134,21 +151,29 @@ namespace SE_Coursework.Pages
                         var line = reader.ReadLine();
 
                         importList.Add(line.ToString());
-
                     }
                 }
 
                 IsTheDataImported = true;
             }
 
-
+            // Once a file is uploaded the content of the button changes to next message
             importFile.Content = "Next Message";                     
 
             SplitImportedData();
         }
-        
+
+        #endregion
+
+        #region Private Method
+
+        /// <summary>
+        /// This method splits the data into 2 blocks of text from the list called importList
+        /// It allows the user to cycle through the imported messages.
+        /// </summary>
         private void SplitImportedData()
-        {
+        { 
+            // This IF statement stop an out of range exception
             if (importCounter < importList.Count)
             {
                 string lineString = importList[importCounter];
@@ -168,10 +193,14 @@ namespace SE_Coursework.Pages
             }
         }
 
+        #endregion
 
         #region Navigation Buttons
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Method which handles the 'Back' button being clicked
+        /// </summary>        
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Instantiate an object of the InputManually page
             MenuPage menuPage = new MenuPage();
@@ -180,18 +209,16 @@ namespace SE_Coursework.Pages
             NavigationService.Navigate(menuPage);
         }
 
-        // Method which handles the 'Exit Application' button being clicked
-        private void exitButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-
+        /// <summary>
+        /// Method which handles the 'Exit Application' button being clicked
+        /// </summary>        
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {   
             // Calls the method ExitApplicationValidation() from the Validation class.
             validation.ExitApplicationValidation();
         }
 
-
         #endregion
-
         
     }
 }

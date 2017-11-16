@@ -1,11 +1,10 @@
 ﻿//////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////// Class ValidationClass ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////// Code Written By: ******************** ////////////////////////////////
+///////////////////////////////////// Code Written By: 03001588 //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Description: Class used to validate the information, input as phone number, email address, twitter ID's etc
-
 
 #region Usings
 
@@ -42,9 +41,7 @@ namespace SE_Coursework.Classes
         public string Header = string.Empty;
         public string Sender = string.Empty;
         public string Subject = string.Empty;
-        public string Text = string.Empty;
-
-        //MessageClass messageToReturn;
+        public string Text = string.Empty;        
 
         #endregion
 
@@ -60,16 +57,20 @@ namespace SE_Coursework.Classes
 
         #region Public Methods
 
+        /// <summary>
+        /// This method validates the message header, it does this by first trimming the input then storing it as header
+        /// The method then checks that the header is 10 charcaters in length. The method then creates a substring of header to check that
+        /// All the charcaters are numeric except for the first character. 
+        /// The method retrieves the first character of header by using it's index of [0] then checks if that value is equal to either
+        /// S, E or T. A boolean value is changed depending which value is matched with the forst character in header. This affects how the method
+        /// MessageBodyInputValidation() validates its input.
+        /// </summary>
+        /// <param name="inputText">Passes in the message header, to be validated</param>
+        /// <returns>A boolean value which returns true if the message header passes validation</returns>
         public bool MessageHeaderInputValidation(string inputText)
-        {
-            // Stores the first character of inputText as the string _inputText
-            string _inputText = inputText[0].ToString();
-
+        {  
             // Trims the input then stores it as the string header
             header = inputText.Trim();
-
-            // Stores a substring of numeric as the string subStringNumeric
-            string subStringNumeric = header.Substring(1, 9);
 
             // Checks the length of the input
             if (!(header.Length).Equals(10))
@@ -77,13 +78,17 @@ namespace SE_Coursework.Classes
                 return false;
             }
 
+            // Stores a substring of numeric as the string subStringNumeric
+            string subStringNumeric = header.Substring(1, 9);           
+
             // Checks the substring is all numbers
             if (subStringNumeric.All(char.IsDigit).Equals(false))
             {
                 return false;
             }
 
-
+            // Stores the first character of inputText as the string _inputText
+            string _inputText = inputText[0].ToString();
 
 
             if (_inputText.ToUpper().Equals("S"))
@@ -91,47 +96,58 @@ namespace SE_Coursework.Classes
                 smsMessage = true;
                 return true;
             }
-
-            if (_inputText.ToUpper().Equals("E"))
+            else if (_inputText.ToUpper().Equals("E"))
             {
                 emailMessage = true;
                 return true;
             }
-
-            if (_inputText.ToUpper().Equals("T"))
+            else if (_inputText.ToUpper().Equals("T"))
             {
                 tweetMessage = true;
                 return true;
+            }
+            else
+            {
+                MessageBox.Show("The header is incorrect. Please check and try again.");
             }
 
             return false;
         }
 
+        /// <summary>
+        /// This method validates the contents of the main body of input text based on which type of message is being input. The method MessageHeaderInputValidation()
+        /// determines what type of message is being input then changes a boolean value based on the message type. In this method the boolean value that has been changed is
+        /// found then the message body is validated based on which boolean has been changed.
+        /// </summary>
+        /// <param name="inputText">Passes in the message body, to be validated</param>
+        /// <returns>A boolean value which returns true if the message being input passes the validation based on the which boolean value is set to true
+        /// from the method MessageHeaderInputValidation()</returns>
         public bool MessageBodyInputValidation(string inputText)
         {   
             EmailAddressAttribute emailAddressCheck = new EmailAddressAttribute();
             PhoneAttribute phoneNumberCheck = new PhoneAttribute();
 
-            // SMS
+            // SMS Validation
+            // This IF statement deals with the validation if the message has been identified as a SMS            
             if (smsMessage.Equals(true))
             {
                 bool smsCheck = true;
                 smsMessage = false;
 
+                // while loop that extracts the phone number then uses the IsValid() from the PhoneAttribute class
                 while (smsCheck)
                 {
                     if (inputText.Length > 15)
                     {
                         for (int i = 15; i > 7; i--)
                         {
+                            // Creates a substring then checks that value with IsValid()
                             sender = inputText.Trim().Substring(0, i);
 
+                            // If the value is a valid phone number, inputText minus the phone number is set to the string text
                             if (phoneNumberCheck.IsValid(sender))
                             {
-
                                 text = inputText.Trim().Substring(i);
-
-
                                 smsCheck = false;
                                 break;
                             }
@@ -141,14 +157,13 @@ namespace SE_Coursework.Classes
                     {
                         for (int i = inputText.Length; i > 7; i--)
                         {
+                            // Creates a substring then checks that value with IsValid()
                             sender = inputText.Trim().Substring(0, i);
 
+                            // If the value is a valid phone number, inputText minus the phone number is set to the string text
                             if (phoneNumberCheck.IsValid(sender))
                             {
-
                                 text = inputText.Trim().Substring(i);
-
-
                                 smsCheck = false;
                                 break;
                             }
@@ -159,15 +174,14 @@ namespace SE_Coursework.Classes
                         MessageBox.Show("The phone number entered, is not a valid phone number.");
                         return false;
                     }
-
                 }
 
-                SetPublicVariable();
-                //MessageBox.Show("SMS Converted");                
+                SetPublicVariable();                                
                 return true;
             }
 
-            // EMAIL
+            // EMAIL Validation
+            // This IF statement deals with the validation if the message has been identified as a Email  
             if (emailMessage.Equals(true))
             {
                 emailMessage = false;
@@ -177,11 +191,8 @@ namespace SE_Coursework.Classes
                 string[] nameArray = { };
                 string[] subjectAndTextArray = { };
 
-
                 string subjectAndText = string.Empty;
                 bool emailAddressFound = false;
-
-
 
                 for (int i = 0; i < splitProText.Length; i++)
                 {
@@ -208,8 +219,6 @@ namespace SE_Coursework.Classes
                     return false;
                 }
 
-
-
                 // Concatenate all the elements into a StringBuilder.
                 StringBuilder nameBuilder = new StringBuilder();
                 foreach (string value in nameArray)
@@ -220,7 +229,6 @@ namespace SE_Coursework.Classes
 
                 name = nameBuilder.ToString().Trim();
 
-
                 // Concatenate all the elements into a StringBuilder.
                 StringBuilder subjectAndTextBuilder = new StringBuilder();
                 foreach (string value in subjectAndTextArray)
@@ -230,8 +238,6 @@ namespace SE_Coursework.Classes
                 }
 
                 subjectAndText = subjectAndTextBuilder.ToString().Trim();
-
-
 
                 if (subjectAndText.ToUpper().StartsWith("SIR"))
                 {
@@ -246,7 +252,6 @@ namespace SE_Coursework.Classes
                     text = subjectAndText.Trim().Substring(20);
                 }
 
-
                 // Checks the email doesn't exceed the maximum length
                 if (text.Length > 1048)
                 {
@@ -254,12 +259,12 @@ namespace SE_Coursework.Classes
                     return false;
                 }
 
-                SetPublicVariable();
-                //MessageBox.Show("Email Converted");                
+                SetPublicVariable();                         
                 return true;
             }
 
-            // TWEET
+            // TWEET Validation
+            // This IF statement deals with the validation if the message has been identified as a Tweet  
             if (tweetMessage.Equals(true))
             {
                 tweetMessage = false; 
@@ -277,7 +282,6 @@ namespace SE_Coursework.Classes
                     return false;
                 }
 
-
                 // Concatenate all the elements into a StringBuilder.
                 StringBuilder builder = new StringBuilder();
                 foreach (string value in splitProText)
@@ -286,24 +290,25 @@ namespace SE_Coursework.Classes
                     builder.Append(' ');
                 }
 
-                text = builder.ToString().Trim();               
+                text = builder.ToString().Trim();
 
-
+                // Checks that the tweet text length is less than 140 characters
                 if (text.Length > 140)
                 {
                     MessageBox.Show("The tweet text is more than 140 characters in length.");
                     return false;
                 }
 
-                SetPublicVariable();
-                //MessageBox.Show("Tweet Converted");                
+                SetPublicVariable();                         
                 return true;
-
             }
 
             return false;
         }
 
+        /// <summary>
+        /// Resets string values back to empty.
+        /// </summary>
         public void EndOfCycle()
         {
             header = string.Empty;
@@ -317,12 +322,11 @@ namespace SE_Coursework.Classes
             Subject = string.Empty;
             Text = string.Empty;
         }
-
-
-
-
-
-        // Adds message to the list
+        
+        /// <summary>
+        /// Adds message to the list called listOfMessages
+        /// </summary>
+        /// <param name="inputText">Used to set the value for MessageText</param>
         public void AddMessageToList(string inputText)
         {
             MessageClass message = new MessageClass()
@@ -333,14 +337,13 @@ namespace SE_Coursework.Classes
                 MessageText = inputText
             };
 
-            listOfMessages.Add(message);
-            //messageToReturn = message;
+            listOfMessages.Add(message);           
             header = sender = subject = text = string.Empty;
         }
 
-
-
-
+        /// <summary>
+        /// This method retrieves the values from the stored Json file as a list of Json objects
+        /// </summary>
         public void RetrieveStoredList()
         {
             int counter = 0;
@@ -359,9 +362,7 @@ namespace SE_Coursework.Classes
                     MessageBox.Show(ex.ToString());
                 }
             }
-
         }
-
 
         #endregion
 

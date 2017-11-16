@@ -12,31 +12,31 @@
         <!--The logo displayed-->
         <Image x:Name="logoPicture" Source="/SE Coursework;component/Images/Logo.bmp" HorizontalAlignment="Center" Height="117" Margin="331,10,331,0" VerticalAlignment="Top" Width="538"/>
 
+        <!-- Message Header-->
         <Label Content="Message Header:" HorizontalAlignment="Left" Height="30" Margin="331,170,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
         <TextBox x:Name="messageHeaderTxt" HorizontalAlignment="Left" Height="30" Margin="331,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
+        <!-- Message Sender-->
         <Label Content="Message Sender:" HorizontalAlignment="Left" Height="30" Margin="495,170,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
         <TextBox x:Name="messageSenderTxt" HorizontalAlignment="Left" Height="30" Margin="495,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
-
-
+        <!-- Message Subject-->
         <Label Content="Message Subject:" HorizontalAlignment="Left" Height="30" Margin="689,170,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="123"/>
         <TextBox x:Name="messageSubjectTxt" HorizontalAlignment="Left" Height="30" Margin="689,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Foreground="Black" FontFamily="Arial" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
+        <!-- Message Body-->
         <Label Content="Message Body:" HorizontalAlignment="Left" Height="30" Margin="331,248,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial" FontSize="14" Width="123" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
         <TextBox x:Name="messageBodyTxt" HorizontalAlignment="Left" Margin="331,286,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="538" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
-
-
-
-        <!--Navigation - button (Setup - Arial Font, Size 12, Cannot be tab selected)-->
+        <!--Navigation -->
         <Button x:Name="exitButton" Content="Exit Application" HorizontalAlignment="Left" Margin="1045,730,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" Click="ExitButton_Click" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3"/>
         <Button x:Name="backButton" Content="Back to Menu" HorizontalAlignment="Left" Margin="1045,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="BackButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
-
-
+        
+        <!-- Next Button-->
         <Button x:Name="nextButton" Content="&gt; &gt; Next Message &gt; &gt;" HorizontalAlignment="Left" Margin="719,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="NextButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        
+        <!-- Previous Button-->
         <Button x:Name="previousButton" Content="&lt; &lt; Previous Message &lt; &lt;" HorizontalAlignment="Left" Margin="331,695,0,0" VerticalAlignment="Top" Width="150"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="PreviousButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
-
 
     </Grid>
 </Page>
