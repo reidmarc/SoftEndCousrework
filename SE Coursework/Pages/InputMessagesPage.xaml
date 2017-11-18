@@ -57,7 +57,7 @@
         <TextBox x:Name="convertedMessageBodyTxt" HorizontalAlignment="Left" Margin="632,320,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Height="358" Width="533" Foreground="Black" FontFamily="Arial" FontSize="14" HorizontalContentAlignment="Left" Padding="3" IsReadOnly="True" BorderBrush="#3498db" BorderThickness="3"/>
 
         <!-- Convert Button-->
-        <Button x:Name="convertButton" Content="Convert" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="ConvertButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
+        <Button x:Name="convertButton" Content="Input" HorizontalAlignment="Left" Margin="452,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" Click="ConvertButton_Click" BorderBrush="#3498db" BorderThickness="3"/>
 
         <!-- Import File Button-->
         <Button x:Name="importFile" Content="Import File" HorizontalAlignment="Left" Margin="34,695,0,0" VerticalAlignment="Top" Width="120"  Height="30" Foreground="Black" FontFamily="Arial" FontSize="12" IsTabStop="False" BorderBrush="#3498db" BorderThickness="3" Click="ImportFile_Click"/>

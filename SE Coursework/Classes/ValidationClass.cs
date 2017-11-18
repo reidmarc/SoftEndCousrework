@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -137,9 +138,9 @@ namespace SE_Coursework.Classes
                 // while loop that extracts the phone number then uses the IsValid() from the PhoneAttribute class
                 while (smsCheck)
                 {
-                    if (inputText.Length > 15)
+                    if (inputText.Length > 20)
                     {
-                        for (int i = 15; i > 7; i--)
+                        for (int i = 20; i > 7; i--)
                         {
                             // Creates a substring then checks that value with IsValid()
                             sender = inputText.Trim().Substring(0, i);
@@ -152,8 +153,8 @@ namespace SE_Coursework.Classes
                                 break;
                             }
                         }
-                    }
-                    else if (inputText.Length > 7 && inputText.Length < 16)
+                    }                   
+                    else if (inputText.Length > 7 && inputText.Length < 21)
                     {
                         for (int i = inputText.Length; i > 7; i--)
                         {
@@ -174,6 +175,13 @@ namespace SE_Coursework.Classes
                         MessageBox.Show("The phone number entered, is not a valid phone number.");
                         return false;
                     }
+                }
+
+                // Checks the length of the SMS
+                if (text.Length > 140)
+                {
+                    MessageBox.Show("The SMS is too long. It can only be upto a maximum of 140 characters");
+                    return false;
                 }
 
                 SetPublicVariable();                                

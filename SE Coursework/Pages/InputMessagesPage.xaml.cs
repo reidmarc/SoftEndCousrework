@@ -110,7 +110,7 @@ namespace SE_Coursework.Pages
             }
 
             // If the message is an Email, then the method SearchForSIR() is called
-            if (validation.Header.StartsWith("E"))
+            if (validation.Header.StartsWith("E") && validation.Subject.StartsWith("SIR"))
             {
                 processing.SearchForSIR(processedText);
             }

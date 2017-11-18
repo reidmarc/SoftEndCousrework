@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -496,16 +497,28 @@ namespace SE_Coursework.Classes
         /// <param name="proText"></param>
         private void FindAndReplaceTextSpeakAbbreviations(ref string proText)
         {   
-            string[] splitProText = proText.Split(' ');
+            string[] splitProText = proText.Trim().Split(' ');
+            bool alreadySet = false;
 
             for (int i = 0; i < splitProText.Length; i++)
-            {
+            {  
                 foreach (KeyValuePair<string, string> abbreviation in textWordsDictionary)
-                {
-                    if (abbreviation.Key.Equals(splitProText[i]))
-                    {
-                        splitProText[i] = ($"{abbreviation.Key.Trim()} <{abbreviation.Value.Trim()}>");
-                    }
+                { 
+                     if (splitProText[i].Equals(abbreviation.Key))
+                     {
+                         splitProText[i] = ($"{abbreviation.Key.Trim()} <{abbreviation.Value.Trim()}>");
+                            alreadySet = true;
+                     }
+
+                     if (splitProText[i].StartsWith(abbreviation.Key) && alreadySet.Equals(false))
+                     {
+                        if (!splitProText[i].All(char.IsLetter))
+                        {
+                            // This string handles there being any symbols or punctuation after the abbreviation
+                            string symbol = splitProText[i][(splitProText[i].Count() - 1)].ToString();
+                            splitProText[i] = ($"{abbreviation.Key.Trim()} <{abbreviation.Value.Trim()}>{symbol}");
+                        }
+                     }                      
                 }
             }
 
